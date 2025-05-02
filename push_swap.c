@@ -6,7 +6,7 @@
 /*   By: rubmedin <rubmedin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 20:15:36 by rubmedin          #+#    #+#             */
-/*   Updated: 2025/04/29 20:15:39 by rubmedin         ###   ########.fr       */
+/*   Updated: 2025/05/02 15:55:19 by rubmedin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,14 @@
 #include <stdio.h>
 
 int	push_swap(char **argv)
-{
-	int	i = 0;
-	while(argv[i])
-	{
-		printf("%s\n", argv[i]);
-		i++;
-	}
+}
+	verify_arg();
 	return (0);
 }
 
 int	main(int argc, char **argv)
 {
-	if(argc <= 1)
+	if(argc < 1)
 		return (1);
 	push_swap(argv);
 	return (0);
