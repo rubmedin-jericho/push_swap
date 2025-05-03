@@ -1,43 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   push_swap_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rubmedin <rubmedin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/29 20:15:36 by rubmedin          #+#    #+#             */
-/*   Updated: 2025/05/03 19:42:08 by rubmedin         ###   ########.fr       */
+/*   Created: 2025/05/03 20:03:42 by rubmedin          #+#    #+#             */
+/*   Updated: 2025/05/03 20:03:43 by rubmedin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
-int	push_swap(char **argv)
-}
-	return (0);
-}
-
-int	verify_n_arg(char **arg, int argc)
+int	ft_strlen(char *str)
 {
 	int	i;
 
-	i = 1;
-	while(i <= argc)
+	i = 0;
+	while(str[i])
+		i++;
+	return (i);
+}
+
+int	is_not_n(char *str)
+{
+	int	i;
+	int	flag;
+	
+	i = 0;
+	flag = 0;
+	while(str[i])
 	{
-		if(is_not_n(arg[i]))
+		if(str[i] == '-' && flag == 0|| str[i] == '+' && flag == 0)
+		{
+			flag = 1;
+			i++;
+		}
+		else if(str[i] == '-' && flag == 1|| str[i] == '+' && flag == 1)
+			return (1);
+		if(str[i] < 48 || str[i] > 57)
 			return (1);
 		i++;
 	}
-	return (0);
-}
-
-int	main(int argc, char **argv)
-{
-	if(argc < 1)
-		return (1);
-	if(verify_n_arg(argv, argc))
-		return (1);
-	push_swap(argv);
 	return (0);
 }
