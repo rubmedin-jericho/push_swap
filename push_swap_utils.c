@@ -6,7 +6,7 @@
 /*   By: rubmedin <rubmedin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 20:03:42 by rubmedin          #+#    #+#             */
-/*   Updated: 2025/05/03 20:03:43 by rubmedin         ###   ########.fr       */
+/*   Updated: 2025/05/05 13:45:07 by rubmedin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ int	is_not_n(char *str)
 	flag = 0;
 	while(str[i])
 	{
-		if(str[i] == '-' && flag == 0|| str[i] == '+' && flag == 0)
+		if((str[i] == '-' && flag == 0) || (str[i] == '+' && flag == 0))
 		{
 			flag = 1;
 			i++;
 		}
-		else if(str[i] == '-' && flag == 1|| str[i] == '+' && flag == 1)
+		else if((str[i] == '-' && flag == 1) || (str[i] == '+' && flag == 1))
 			return (1);
 		if(str[i] < 48 || str[i] > 57)
 			return (1);

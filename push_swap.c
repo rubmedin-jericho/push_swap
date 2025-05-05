@@ -6,7 +6,7 @@
 /*   By: rubmedin <rubmedin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 20:15:36 by rubmedin          #+#    #+#             */
-/*   Updated: 2025/05/03 19:42:08 by rubmedin         ###   ########.fr       */
+/*   Updated: 2025/05/05 16:55:47 by rubmedin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,17 @@
 #include <stdio.h>
 
 int	push_swap(char **argv)
-}
+{
+	(void)argv;
 	return (0);
 }
 
-int	verify_n_arg(char **arg, int argc)
+int	verify_arg(char **arg, int argc)
 {
 	int	i;
 
 	i = 1;
-	while(i <= argc)
+	while(i < argc)
 	{
 		if(is_not_n(arg[i]))
 			return (1);
@@ -34,10 +35,16 @@ int	verify_n_arg(char **arg, int argc)
 
 int	main(int argc, char **argv)
 {
-	if(argc < 1)
+	if(argc < 2)
+	{
+		write(1,"Error, few args\n",16);
 		return (1);
-	if(verify_n_arg(argv, argc))
+	}
+	if(verify_arg(argv, argc))
+	{
+		write(1,"Error args\n",11);
 		return (1);
+	}
 	push_swap(argv);
 	return (0);
 }

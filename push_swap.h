@@ -4,9 +4,14 @@
 struct stack
 {
 	int	num;
-	struct next = NULL;
+	struct stack *next;
 };
 
 #include <stdlib.h>
+#include <limits.h>
+#include <unistd.h>
 
+
+int	is_not_n(char *str);
+int	ft_strlen(char *str);
 #endif
