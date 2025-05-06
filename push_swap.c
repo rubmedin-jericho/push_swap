@@ -13,9 +13,12 @@
 #include "push_swap.h"
 #include <stdio.h>
 
-int	push_swap(char **argv)
+int	push_swap(char **argv, int argc)
 {
-	(void)argv;
+  stack *stack_a; 
+
+  stack_a = NULL;
+  create_linked_list(&stack, argv, argc);
 	return (0);
 }
 
@@ -45,6 +48,6 @@ int	main(int argc, char **argv)
 		write(1,"Error args\n",11);
 		return (1);
 	}
-	push_swap(argv);
+	push_swap(argv, argc);
 	return (0);
 }
