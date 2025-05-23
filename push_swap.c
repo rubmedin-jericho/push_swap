@@ -11,15 +11,15 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
-
-void create_linked_list(node **stack) {}
 
 int push_swap(char **argv, int argc) {
-  struct stack *stack_a;
+  node *stack_a;
 
   stack_a = NULL;
-  create_linked_list(&stack_a, argv, argc);
+  if(create_linked_list(&stack_a, argv, argc))
+    return (1);
+  print_list(stack_a);
+  free_list(stack_a);
   return (0);
 }
 
@@ -36,14 +36,17 @@ int verify_arg(char **arg, int argc) {
 }
 
 int main(int argc, char **argv) {
-  if (argc != 2) {
+  if (argc < 2) {
     write(1, "Error, args\n", 12);
     return (1);
   }
+
   if (verify_arg(argv, argc)) {
     write(1, "Error args\n", 11);
     return (1);
   }
-  push_swap(argv, argc);
+
+  if(push_swap(argv, argc))
+    return (1);
   return (0);
 }

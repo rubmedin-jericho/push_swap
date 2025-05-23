@@ -12,6 +12,25 @@
 
 #include "push_swap.h"
 
+int ft_atoi(char *str){
+  int sign;
+  int i;
+  int nbr;
+
+  sign = 1;
+  i = 0;
+  nbr = 0;
+
+  if(str[0] == '-')
+    sign = -1;
+  while(str[i])
+  {
+    nbr = (nbr * 10) + (str[i] - '0');
+    i++;
+  }
+  return (nbr * sign);
+}
+
 int	ft_strlen(char *str)
 {
 	int	i;

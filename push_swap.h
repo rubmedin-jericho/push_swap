@@ -10,6 +10,15 @@ typedef struct stack {
 #include <stdlib.h>
 #include <unistd.h>
 
-int is_not_n(char *str);
-int ft_strlen(char *str);
+
+int     is_not_n(char *str);
+int     ft_atoi(char *str);
+int     ft_strlen(char *str);
+void    free_list(node *stack);
+void     add_node_to_list(node **stack, node *node);
+node    *create_node(int valor);
+int     create_linked_list(node **stack, char **argv, int argc);
+
+//borrar apartir de aqui son funciones para probar.
+void    print_list(node *stack);
 #endif
