@@ -18,6 +18,9 @@ int push_swap(char **argv, int argc) {
   stack_a = NULL;
   if(create_linked_list(&stack_a, argv, argc))
     return (1);
+  //La siguiente funcion se borra antes de entregar.  
+  print_list(stack_a);
+  sa(&stack_a);
   print_list(stack_a);
   free_list(stack_a);
   return (0);
