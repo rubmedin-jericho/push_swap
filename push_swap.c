@@ -12,11 +12,36 @@
 
 #include "push_swap.h"
 
+int verify_num(node *stack_a)
+{
+  node *node_tmp;
+  node *node_count;
+
+  node_count = stack_a;
+  while(node_count)
+  {
+    node_tmp = node_count->next;
+    while(node_tmp)
+    {
+      if(node_tmp->num == node_count->num)
+      {
+        write(1,"Error, num duplicate\n",21);
+        return (1);
+      }
+      node_tmp = node_tmp->next;
+    }
+    node_count = node_count->next;
+  }
+  return (0);
+}
+
 int push_swap(char **argv, int argc) {
   node *stack_a;
 
   stack_a = NULL;
   if(create_linked_list(&stack_a, argv, argc))
+    return (1);
+  if(verify_num(stack_a))
     return (1);
   //La siguiente funcion se borra antes de entregar.  
   print_list(stack_a);
@@ -40,7 +65,7 @@ int verify_arg(char **arg, int argc) {
 
 int main(int argc, char **argv) {
   if (argc < 2) {
-    write(1, "Error, num of args\n", 12);
+    write(1, "Error, args\n", 12);
     return (1);
   }
 
