@@ -43,9 +43,17 @@ int push_swap(char **argv, int argc) {
     return (1);
   if(verify_num(stack_a))
     return (1);
+  if(argc > 5)
+    printf("Funcion de algoritmo turco\n");
+  else if(argc == 2)
+    printf("Funcion de 1 argumentos\n");
+  else if(argc == 3)
+    printf("Funcion de 2 argumentos\n");
+  else if(argc == 4)
+    printf("Funcion de 3 argumentos\n");
+  else if(argc == 5)
+    printf("Funcion de 4 argumentos\n");
   //La siguiente funcion se borra antes de entregar.  
-  print_list(stack_a);
-  sa(&stack_a);
   print_list(stack_a);
   free_list(stack_a);
   return (0);
@@ -68,12 +76,10 @@ int main(int argc, char **argv) {
     write(1, "Error, args\n", 12);
     return (1);
   }
-
   if (verify_arg(argv, argc)) {
     write(1, "Error args\n", 11);
     return (1);
   }
-
   if(push_swap(argv, argc))
     return (1);
   return (0);

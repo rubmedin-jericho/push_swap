@@ -9,6 +9,8 @@ typedef struct stack {
 #include <limits.h>
 #include <stdlib.h>
 #include <unistd.h>
+//borrar esta libreria antes de entregar
+#include <stdio.h>
 
 
 int     is_not_n(char *str);
