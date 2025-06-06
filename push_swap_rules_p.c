@@ -14,7 +14,7 @@ void pa(node **stack_a, node **stack_b)
   write(1,"pa\n",3);
 }
 
-void pa(node **stack_a, node **stack_b)
+void pb(node **stack_a, node **stack_b)
 {
   node *node_tmp;
 

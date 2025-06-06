@@ -40,7 +40,7 @@ int verify_arg(char **arg, int argc) {
 
 int main(int argc, char **argv) {
   if (argc < 2) {
-    write(1, "Error, args\n", 12);
+    write(1, "Error, num of args\n", 12);
     return (1);
   }
 

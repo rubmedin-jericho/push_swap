@@ -22,6 +22,14 @@ int     create_linked_list(node **stack, char **argv, int argc);
 void    sa(node **stack_a);
 void    sb(node **stack_b);
 void    ss(node **stack_a, node **stack_b);
+void    pa(node **stack_a, node **stack_b);
+void    pb(node **stack_a, node **stack_b);
+void    ra(node **stack_a);
+void    rb(node **stack_b);
+void    rr(node **stack_a, node **stack_b);
+void    rra(node **stack);
+void    rrb(node **stack);
+void    rrr(node **stack_a, node **stack_b);
 //borrar apartir de aqui son funciones para probar.
 void    print_list(node *stack);
 #endif
