@@ -45,15 +45,13 @@ int push_swap(char **argv, int argc) {
     return (1);
   if(argc > 5)
     printf("Funcion de algoritmo turco\n");
-  else if(argc == 2)
-    printf("Funcion de 1 argumentos\n");
   else if(argc == 3)
     printf("Funcion de 2 argumentos\n");
   else if(argc == 4)
     printf("Funcion de 3 argumentos\n");
   else if(argc == 5)
     printf("Funcion de 4 argumentos\n");
-  //La siguiente funcion se borra antes de entregar.  
+  //La siguiente funcion se borra antes de entregar.)  
   print_list(stack_a);
   free_list(stack_a);
   return (0);
