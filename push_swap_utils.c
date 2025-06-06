@@ -15,20 +15,28 @@
 int ft_atoi(char *str){
   int sign;
   int i;
-  int nbr;
+  long nbr;
 
   sign = 1;
   i = 0;
   nbr = 0;
 
-  if(str[0] == '-')
+  if(str[i] == '-')
+  {
     sign = -1;
+    i++;
+  }
   while(str[i])
   {
     nbr = (nbr * 10) + (str[i] - '0');
     i++;
   }
-  return (nbr * sign);
+  if((nbr * sign < INT_MIN) || (nbr * sign > INT_MAX))
+  {
+    write(1,"Error, limits int\n",18);
+    return (1);
+  }
+  return ((int)(nbr * sign));
 }
 
 int	ft_strlen(char *str)

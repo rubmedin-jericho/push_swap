@@ -41,11 +41,15 @@ node *create_node(int valor){
 int create_linked_list(node **stack, char **argv, int argc) {
   node *node_tmp;
   int i; 
+  int num_atoi;
 
   i = 1;
   while(i < argc)
   {
-    node_tmp = create_node(ft_atoi(argv[i]));
+    num_atoi = ft_atoi(argv[i]);
+    if(num_atoi == 1)
+      return (1);
+    node_tmp = create_node(num_atoi);
     if(!node_tmp)
         return (1);
     if(*stack == NULL)
