@@ -19,7 +19,7 @@ void free_list(node *stack);
 void add_node_to_list(node **stack, node *node);
 node *create_node(int valor);
 int create_linked_list(node **stack, char **argv, int argc);
-void sort_algorithm(node **stack_a);
+void sort_algorithm(node **stack_a, int argc);
 
 void sa(node **stack_a);
 void sb(node **stack_b);

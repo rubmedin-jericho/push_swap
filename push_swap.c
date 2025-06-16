@@ -40,7 +40,8 @@ static int push_swap(char **argv, int argc) {
   if (verify_num(stack_a))
     return (1);
   if (argc > 5)
-    sort_algorithm(&stack_a);
+    printf("hola");
+    //sort_algorithm(&stack_a, argc);
   else if (argc == 3)
     printf("Funcion de 2 argumentos\n");
   else if (argc == 4)

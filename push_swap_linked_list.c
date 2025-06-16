@@ -1,6 +1,5 @@
 
 #include "push_swap.h"
-#include <stdio.h>
 
 void print_list(node *stack){
   while (stack != NULL) {
@@ -47,8 +46,6 @@ int create_linked_list(node **stack, char **argv, int argc) {
   while(i < argc)
   {
     num_atoi = ft_atoi(argv[i]);
-    if(num_atoi == 1)
-      return (1);
     node_tmp = create_node(num_atoi);
     if(!node_tmp)
         return (1);
