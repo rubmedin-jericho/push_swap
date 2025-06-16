@@ -36,7 +36,7 @@ void rb(node **stack_b)
   write(1,"rb\n",1);
 }
   
-void ra_modify(node **stack_a)
+static void ra_modify(node **stack_a)
 {
   node *node_tmp;
   node *cursor;
@@ -53,7 +53,7 @@ void ra_modify(node **stack_a)
   cursor->next = node_tmp;
 }
 
-void rb_modify(node **stack_b)
+static void rb_modify(node **stack_b)
 {
   node *node_tmp;
   node *cursor;
