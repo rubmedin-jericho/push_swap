@@ -12,7 +12,38 @@
 
 #include "push_swap.h"
 
-int ft_atoi(char *str){
+static int index_increment(node *node_tmp, node *stack)
+{
+  int index_num;
+  node *tmp;
+
+  index_num = 0;
+  tmp = stack;
+  while(tmp)
+  {
+    if(node_tmp->num > tmp->num)
+      index_num++;
+    tmp = tmp->next;
+  }
+  return (index_num);
+}
+
+void  index_assign(node **stack)
+{
+  node *node_tmp;
+  int index_num;
+
+  node_tmp = *stack;
+  while(node_tmp)
+  {
+    index_num = index_increment(node_tmp, *stack);
+    node_tmp->target = index_num;
+    node_tmp = node_tmp->next;
+  }
+}
+
+int ft_atoi(char *str)
+{
   int sign;
   int i;
   long nbr;

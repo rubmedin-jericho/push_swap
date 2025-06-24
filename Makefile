@@ -9,14 +9,15 @@ push_swap_rules_r.c \
 push_swap_rules_p.c \
 push_swap_rules_rr.c \
 push_swap_algorithm.c \
-push_swap_linked_list.c
+push_swap_linked_list.c \
+push_swap_sort_case.c
 
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJS) 
-	$(CC) $(FLAGS) $(OBJS) -o $(NAME)
+	$(CC) $(FLAGS) $(OBJS) -g -o $(NAME)
 
 %.o: %.c Makefile $(HEADER)
 	$(CC) $(FLAGS) -c $< -o $@

@@ -33,21 +33,23 @@ static int verify_num(node *stack_a) {
 
 static int push_swap(char **argv, int argc) {
   node *stack_a;
+  node *stack_b;
 
   stack_a = NULL;
+  stack_b = NULL;
   if (create_linked_list(&stack_a, argv, argc))
     return (1);
   if (verify_num(stack_a))
     return (1);
   if (argc > 5)
-    printf("hola");
-    //sort_algorithm(&stack_a, argc);
+    printf("Start Program\n");
+    //sort_algorithm(&stack_a,);
   else if (argc == 3)
-    printf("Funcion de 2 argumentos\n");
+      case_3(&stack_a);
   else if (argc == 4)
-    printf("Funcion de 3 argumentos\n");
+      case_4(&stack_a);
   else if (argc == 5)
-    printf("Funcion de 4 argumentos\n");
+      case_5(&stack_a, &stack_b);
   // La siguiente funcion se borra antes de entregar.)
   print_list(stack_a);
   free_list(stack_a);

@@ -3,7 +3,7 @@
 
 void print_list(node *stack){
   while (stack != NULL) {
-    printf("node_num: %d\n", stack->num);
+    printf("node_num: %d ---- node_index: %i\n", stack->num, stack->target);
     stack = stack->next;
   }
 }
@@ -55,5 +55,6 @@ int create_linked_list(node **stack, char **argv, int argc) {
       add_node_to_list(stack, node_tmp);
     i++;
   }
+  index_assign(stack);
   return (0);
 }

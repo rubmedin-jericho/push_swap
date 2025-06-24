@@ -2,20 +2,25 @@
 
 void ra(node **stack_a)
 {
-  node *node_tmp;
-  node *cursor;
+  node *tmp;
+  node *init;
+  node *last;
 
   if((*stack_a) == NULL)
     return ;
-  node_tmp = malloc(sizeof(node));
-  cursor = malloc(sizeof(node));
-  cursor = (*stack_a);
-  node_tmp = (*stack_a);
-  node_tmp->next = NULL; 
-  while(cursor->next != NULL)
-    cursor = cursor->next;
-  cursor->next = node_tmp;
-  write(1,"ra\n",1);
+  last = (*stack_a);
+  init = (*stack_a);
+  while(last->next != NULL)
+  {
+    if(last->next->next == NULL)
+      tmp = last;
+    last = last->next;
+  }
+  last->next = init->next;
+  (*stack_a) = last;
+  tmp->next = init;
+  init->next = NULL;
+  write(1,"ra\n",2);
 }
 
 void rb(node **stack_b)

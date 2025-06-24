@@ -2,8 +2,12 @@
 #define PUSH_SWAP_H
 
 typedef struct stack {
-  int num;
-  struct stack *next;
+  int     num;
+  int     position;
+  int     target;
+  int     cost_a;
+  int     cost_b;
+  struct  stack *next;
 } node;
 
 #include <limits.h>
@@ -20,6 +24,10 @@ void add_node_to_list(node **stack, node *node);
 node *create_node(int valor);
 int create_linked_list(node **stack, char **argv, int argc);
 void sort_algorithm(node **stack_a, int argc);
+void  index_assign(node **stack);
+void case_3(node **stack);
+void case_4(node **stack);
+void case_5(node **stack_a, node **stack_b);
 
 void sa(node **stack_a);
 void sb(node **stack_b);
