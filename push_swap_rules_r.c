@@ -4,75 +4,70 @@ void ra(node **stack_a)
 {
   node *tmp;
   node *init;
-  node *last;
 
   if((*stack_a) == NULL)
     return ;
-  last = (*stack_a);
-  init = (*stack_a);
-  while(last->next != NULL)
-  {
-    if(last->next->next == NULL)
-      tmp = last;
-    last = last->next;
-  }
-  last->next = init->next;
-  (*stack_a) = last;
-  tmp->next = init;
+  tmp = *stack_a;
+  init = *stack_a;
+
+  (*stack_a) = init->next;
+  while(tmp->next != NULL)
+    tmp = tmp->next;
   init->next = NULL;
-  write(1,"ra\n",2);
+  tmp->next = init;
+  write(1,"ra\n",3);
 }
 
 void rb(node **stack_b)
 {
-  node *node_tmp;
-  node *cursor;
+  node *tmp;
+  node *init;
 
   if((*stack_b) == NULL)
     return ;
-  node_tmp = malloc(sizeof(node));
-  cursor = malloc(sizeof(node));
-  cursor = (*stack_b);
-  node_tmp = (*stack_b);
-  node_tmp->next = NULL; 
-  while(cursor->next != NULL)
-    cursor = cursor->next;
-  cursor->next = node_tmp;
-  write(1,"rb\n",1);
+  tmp = *stack_b;
+  init = *stack_b;
+
+  (*stack_b) = init->next;
+  while(tmp->next != NULL)
+    tmp = tmp->next;
+  init->next = NULL;
+  tmp->next = init;
+  write(1,"rb\n",3);
 }
-  
+
 static void ra_modify(node **stack_a)
 {
-  node *node_tmp;
-  node *cursor;
+  node *tmp;
+  node *init;
 
-  if((*stack_a == NULL))
+  if((*stack_a) == NULL)
     return ;
-  node_tmp = malloc(sizeof(node));
-  cursor = malloc(sizeof(node));
-  cursor = (*stack_a);
-  node_tmp = (*stack_a);
-  node_tmp->next = NULL; 
-  while(cursor->next != NULL)
-    cursor = cursor->next;
-  cursor->next = node_tmp;
+  tmp = *stack_a;
+  init = *stack_a;
+
+  (*stack_a) = init->next;
+  while(tmp->next != NULL)
+    tmp = tmp->next;
+  init->next = NULL;
+  tmp->next = init;
 }
 
 static void rb_modify(node **stack_b)
 {
-  node *node_tmp;
-  node *cursor;
+  node *tmp;
+  node *init;
 
   if((*stack_b) == NULL)
     return ;
-  node_tmp = malloc(sizeof(node));
-  cursor = malloc(sizeof(node));
-  cursor = (*stack_b);
-  node_tmp = (*stack_b);
-  node_tmp->next = NULL; 
-  while(cursor->next != NULL)
-    cursor = cursor->next;
-  cursor->next = node_tmp;
+  tmp = *stack_b;
+  init = *stack_b;
+
+  (*stack_b) = init->next;
+  while(tmp->next != NULL)
+    tmp = tmp->next;
+  init->next = NULL;
+  tmp->next = init;
 }
 
 void rr(node **stack_a, node **stack_b)

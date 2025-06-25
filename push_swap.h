@@ -25,8 +25,9 @@ node *create_node(int valor);
 int create_linked_list(node **stack, char **argv, int argc);
 void sort_algorithm(node **stack_a, int argc);
 void  index_assign(node **stack);
+void case_2(node **stack);
 void case_3(node **stack);
-void case_4(node **stack);
+void case_4(node **stack_a, node **stack_b);
 void case_5(node **stack_a, node **stack_b);
 
 void sa(node **stack_a);
