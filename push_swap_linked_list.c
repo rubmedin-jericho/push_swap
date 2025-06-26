@@ -3,7 +3,7 @@
 
 void print_list(node *stack){
   while (stack != NULL) {
-    printf("node_num: %d ---- node_index: %i\n", stack->num, stack->target);
+    printf("node_num: %d  ---- node_pos: %i ----  node_index: %i  ----  node_cost_b: %i ----  node_cost_a: %i\n", stack->num, stack->position , stack->target, stack->cost_b, stack->cost_a);
     stack = stack->next;
   }
 }

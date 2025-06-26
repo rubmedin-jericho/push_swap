@@ -42,8 +42,7 @@ static int push_swap(char **argv, int argc) {
   if (verify_num(stack_a))
     return (1);
   if (argc > 6)
-    printf("Start Program\n");
-    //sort_algorithm(&stack_a,);
+    sort_algorithm(&stack_a, &stack_b);
   else if (argc == 3)
       case_2(&stack_a);
   else if (argc == 4)
@@ -53,10 +52,10 @@ static int push_swap(char **argv, int argc) {
   else if (argc == 6)
       case_5(&stack_a, &stack_b);
   // La siguiente funcion se borra antes de entregar.)
-  printf("lista_a\n");
-  print_list(stack_a);
-  printf("lista_b\n");
-  print_list(stack_b);
+//  printf("lista_a\n");
+//  print_list(stack_a);
+//  printf("lista_b\n");
+//  print_list(stack_b);
   free_list(stack_a);
   return (0);
 }

@@ -1,59 +1,87 @@
 #include "push_swap.h"
 
-//static int chose_node_less_move(node **stack_a, node **stack_b)
-//{
-//  //Esta funcion estoy pensando que ire pasando de nodo en nodo 
-//  //mirando el numero de movimientos posibles hasta que encuentre
-//  //el que menos moviimientos haga y devuelve la posicion donde se encuentre.
-//}
+int ft_size_stack(node **stack_a)
+{
+  int i;
+  node *stack_tmp;
 
-//static void init_stack_b(node **stack_b, node **stack_a)
-//{
-//  int i;
-//
-//  i = 0;
-//  while(i < 2)
-//  {
-//    pb(stack_a, stack_b);
-//    i++;
-//  }
-//  if((*stack_b)->num < (*stack_b)->next->num)
-//    sb(stack_b);
-//}
+  stack_tmp = *stack_a;
+  i = 0;
+  while(stack_tmp)
+  {
+    i++;
+    stack_tmp = stack_tmp->next;
+  }
+  return (i);
+}
 
-//static int ft_size_stack(node **stack_a)
-//{
-//  int i;
-//  node *stack_tmp;
-//
-//  stack_tmp = *stack_a;
-//  i = 0;
-//  while(!stack_tmp)
-//  {
-//    i++;
-//    stack_tmp = stack_tmp->next;
-//  }
-//  return (i);
-//}
+static void calculate_position(node **stack)
+{
+  node *tmp;
+  int pos;
 
-//void sort_algorithm(node **stack_a, int argc)
-//{
-//  node *stack_b;
-//  node *stack_tmp;
-//  int i;
-//
-//  i = 1;
-//  stack_b = NULL;
-//  while(i < argc)
-//  {
-//    if(ft_size_stack(stack_a) > 3)
-//    {
-//      if(stack_b == NULL)
-//        init_stack_b(&stack_b, stack_a);
-//      //chose_node_less_move(stack_a, &stack_b);
-//    }
-//    i++;
-//  }
-//  print_list(stack_b);
-//  free_list(stack_b);
-//}
+  pos = 0;
+  tmp = (*stack);
+  while(tmp)
+  {
+    tmp->position = pos++;
+    tmp = tmp->next;
+  }
+}
+
+static node *get_optimal_node(node **stack_a, node **stack_b)
+{
+  node *node_return;
+  node *tmp;
+
+  cost_b(stack_b);
+  cost_a(stack_a, stack_b);
+  node_return = (*stack_b);
+  tmp = (*stack_b);
+  while(tmp)
+  {
+    if((tmp->cost_b + tmp->cost_a) < (node_return->cost_b + node_return->cost_a))
+      node_return = tmp;
+    tmp = tmp->next;
+  }
+  return (node_return);
+}
+
+static void next_optimal_move(node **stack_a, node **stack_b)
+{
+  node *target;
+  node *last;
+
+  target = get_optimal_node(stack_a, stack_b);
+  last = (*stack_a);
+  while(last->next)
+    last = last->next;
+  calculate_position(stack_a);
+  printf("lista A\n");
+  print_list((*stack_a));
+  printf("lista B\n");
+  print_list((*stack_b));
+  repeat_instruction(target, stack_a); 
+  pa(stack_a, stack_b);
+}
+
+void sort_algorithm(node **stack_a, node **stack_b)
+{
+  int i;
+
+  i = 0; 
+  while(i != 3)
+  {  
+    pb(stack_a, stack_b);
+    i = ft_size_stack(stack_a);
+  }
+  case_3(stack_a);
+  i = ft_size_stack(stack_b);
+  while(i != 0)
+  {
+    calculate_position(stack_b);
+    next_optimal_move(stack_a, stack_b);
+    i--;
+  //  i = ft_size_stack(stack_b);
+  }
+}
