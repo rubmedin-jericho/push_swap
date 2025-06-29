@@ -15,7 +15,7 @@ int ft_size_stack(node **stack_a)
   return (i);
 }
 
-static void calculate_position(node **stack)
+void calculate_position(node **stack)
 {
   node *tmp;
   int pos;
@@ -29,13 +29,11 @@ static void calculate_position(node **stack)
   }
 }
 
-static node *get_optimal_node(node **stack_a, node **stack_b)
+static node *get_optimal_node(node **stack_b)
 {
   node *node_return;
   node *tmp;
 
-  cost_b(stack_b);
-  cost_a(stack_a, stack_b);
   node_return = (*stack_b);
   tmp = (*stack_b);
   while(tmp)
@@ -52,17 +50,17 @@ static void next_optimal_move(node **stack_a, node **stack_b)
   node *target;
   node *last;
 
-  target = get_optimal_node(stack_a, stack_b);
+  target = get_optimal_node(stack_b);
   last = (*stack_a);
   while(last->next)
     last = last->next;
-  calculate_position(stack_a);
+  repeat_instruction(target, stack_a); 
   printf("lista A\n");
   print_list((*stack_a));
   printf("lista B\n");
   print_list((*stack_b));
-  repeat_instruction(target, stack_a); 
   pa(stack_a, stack_b);
+  printf("SIGUIENTE\n\n");
 }
 
 void sort_algorithm(node **stack_a, node **stack_b)
@@ -79,9 +77,12 @@ void sort_algorithm(node **stack_a, node **stack_b)
   i = ft_size_stack(stack_b);
   while(i != 0)
   {
+    calculate_position(stack_a);
     calculate_position(stack_b);
+    cost_b(stack_b);
+    cost_a(stack_a, stack_b);
     next_optimal_move(stack_a, stack_b);
     i--;
-  //  i = ft_size_stack(stack_b);
+   // i = ft_size_stack(stack_b);
   }
 }

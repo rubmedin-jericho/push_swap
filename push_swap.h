@@ -27,6 +27,9 @@ void sort_algorithm(node **stack_a, node **stack_b);
 void  index_assign(node **stack);
 int ft_size_stack(node **stack_a);
 void repeat_instruction(node *target, node **stack_a);
+void calculate_position(node **stack);
+int find_pos(node **stack_a, int target_b);
+
 void cost_b(node **stack_b);
 void cost_a(node **stack_a, node **stack_b);
 void case_2(node **stack);
