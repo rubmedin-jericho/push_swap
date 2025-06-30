@@ -55,10 +55,6 @@ static void next_optimal_move(node **stack_a, node **stack_b)
   while(last->next)
     last = last->next;
   repeat_instruction(target, stack_a); 
-  printf("lista A\n");
-  print_list((*stack_a));
-  printf("lista B\n");
-  print_list((*stack_b));
   pa(stack_a, stack_b);
   printf("SIGUIENTE\n\n");
 }
@@ -75,14 +71,20 @@ void sort_algorithm(node **stack_a, node **stack_b)
   }
   case_3(stack_a);
   i = ft_size_stack(stack_b);
+  printf("\nSIZE: %i\n", i);
   while(i != 0)
   {
     calculate_position(stack_a);
     calculate_position(stack_b);
     cost_b(stack_b);
     cost_a(stack_a, stack_b);
+    printf("lista A\n");
+    print_list((*stack_a));
+    printf("lista B\n");
+    print_list((*stack_b));
     next_optimal_move(stack_a, stack_b);
     i--;
    // i = ft_size_stack(stack_b);
   }
+
 }
