@@ -20,7 +20,7 @@ void cost_b(node **stack_b)
   }
 }
 
-int  find_pos(node **stack_a, int target_b)
+int  find_pos(node **stack_a, int num_target)
 {
   node *tmp;
   int flag;
@@ -31,7 +31,7 @@ int  find_pos(node **stack_a, int target_b)
   tmp = (*stack_a);
   while(tmp)
   {
-    if(tmp->target > flag && tmp->target < target_b)
+    if(tmp->target > flag && tmp->num < num_target)
     {
       flag = tmp->target;
       pos = tmp->position;
@@ -53,20 +53,16 @@ void cost_a(node **stack_a, node **stack_b)
   size_stack = ft_size_stack(stack_a); 
   while(tmp_b)
   {
-    pos_less_than_b = find_pos(stack_a, tmp_b->target);
-    printf("\nposition: %i\n", pos_less_than_b);
+    pos_less_than_b = find_pos(stack_a, tmp_b->num);
     if(pos_less_than_b <= (size_stack / 2))
-      tmp_b->cost_a = pos_less_than_b + 1;
-    else
+      tmp_b->cost_a = (pos_less_than_b + 1);
+    else if(pos_less_than_b > (size_stack / 2))
     {
-      cost =  (pos_less_than_b + 1) - (size_stack / 2);
-
-      printf("\nNUM_COST: %i\nCOST: %i\n",tmp_b->num, cost);
-      if(cost == 2)
-        cost = 0;
-      cost = -(cost);
+      cost = (pos_less_than_b + 1) - size_stack;
       tmp_b->cost_a = cost;  
     }
+    printf("NUM_VIEW: %i\nPOSITION: %i\nCOSTO: %i\n",tmp_b->num, pos_less_than_b, tmp_b->cost_a);
+    //printf("numerologia: %i\n", tmp_b->num);
     tmp_b = tmp_b->next;
   }
 }
@@ -76,28 +72,21 @@ void repeat_instruction(node *target, node **stack_a)
 {
   int i;
   node *last;
-  //int size_stack;
-  //int pos;
 
-  //size_stack = ft_size_stack(stack_a);
-  //pos = find_pos(stack_a, target->target);
   last = (*stack_a);
-  while(last)
+  while(last->next)
     last = last->next;
   i = 0;
-  //if(pos <= (size_stack / 2))
-  if(target->cost_a > 0 && target->target < last->target)
+  if(target->cost_a > 0)
   {
     while(i++ < target->cost_a)
       ra(stack_a);
   }
   else if(target->cost_a < 0)
   {
-    while(i++ < -(target->cost_a))
+    target->cost_a = -(target->cost_a);
+    while(i++ < target->cost_a)
       rra(stack_a);
   }
-
-  //if(target->target < (ft_size_stack(stack_a) / 2))
-  //else if(target->target > (ft_size_stack(stack_a) / 2) && (last->target > target->target))
 }
 

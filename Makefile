@@ -18,10 +18,10 @@ OBJS = $(SRCS:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS) 
-	$(CC) $(FLAGS) $(OBJS) -g -o $(NAME)
+	$(CC) $(FLAGS) -g $(OBJS) -o $(NAME)
 
 %.o: %.c Makefile $(HEADER)
-	$(CC) $(FLAGS) -c $< -o $@
+	$(CC) $(FLAGS) -g -c $< -o $@
 
 clean:
 	rm -rf $(OBJS)

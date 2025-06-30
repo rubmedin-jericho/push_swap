@@ -71,7 +71,6 @@ void sort_algorithm(node **stack_a, node **stack_b)
   }
   case_3(stack_a);
   i = ft_size_stack(stack_b);
-  printf("\nSIZE: %i\n", i);
   while(i != 0)
   {
     calculate_position(stack_a);
