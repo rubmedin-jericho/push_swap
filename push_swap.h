@@ -26,9 +26,11 @@ int create_linked_list(node **stack, char **argv, int argc);
 void sort_algorithm(node **stack_a, node **stack_b);
 void  index_assign(node **stack);
 int ft_size_stack(node **stack_a);
-void repeat_instruction(node *target, node **stack_a);
+void make_instruction(node *target, node **stack_a);
 void calculate_position(node **stack);
-int find_pos(node **stack_a, int target_b);
+int find_pos(node **stack_a, node *target);
+void prepare_stack_b(node *target, node **stack_b);
+int find_the_last_pos(node **stack_a);
 
 void cost_b(node **stack_b);
 void cost_a(node **stack_a, node **stack_b);

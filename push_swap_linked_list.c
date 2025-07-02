@@ -26,7 +26,8 @@ void add_node_to_list(node **stack, node *node_a){
   node_tmp->next = node_a;
 }
 
-node *create_node(int valor){
+node *create_node(int valor)
+{
   node *node_tmp;
 
   node_tmp = malloc(sizeof(node));

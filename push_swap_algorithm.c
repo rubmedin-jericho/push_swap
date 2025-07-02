@@ -48,15 +48,13 @@ static node *get_optimal_node(node **stack_b)
 static void next_optimal_move(node **stack_a, node **stack_b)
 {
   node *target;
-  node *last;
 
   target = get_optimal_node(stack_b);
-  last = (*stack_a);
-  while(last->next)
-    last = last->next;
-  repeat_instruction(target, stack_a); 
+  printf("\nTARGET_VIEW: %i\n", target->num);
+  if(target->position != 0)
+    prepare_stack_b(target, stack_b);
+  make_instruction(target, stack_a); 
   pa(stack_a, stack_b);
-  printf("SIGUIENTE\n\n");
 }
 
 void sort_algorithm(node **stack_a, node **stack_b)
@@ -77,13 +75,23 @@ void sort_algorithm(node **stack_a, node **stack_b)
     calculate_position(stack_b);
     cost_b(stack_b);
     cost_a(stack_a, stack_b);
-    printf("lista A\n");
+    printf("\nSTACK_A\n");
     print_list((*stack_a));
-    printf("lista B\n");
+    printf("\n");
+    printf("\nSTACK_B\n");
     print_list((*stack_b));
     next_optimal_move(stack_a, stack_b);
+    printf("\nSTACK_A_AFTER\n");
+    print_list((*stack_a));
+    printf("\n");
+    printf("\nSTACK_B_AFTER\n");
+    print_list((*stack_b));
     i--;
    // i = ft_size_stack(stack_b);
+    printf("\n********************************\n");
   }
-
+    printf("STACK_A_FINISH\n");
+    print_list((*stack_a));
+    printf("STACK_B_FINISH\n");
+    print_list((*stack_b));
 }

@@ -4,6 +4,7 @@ NAME = push_swap
 HEADER = push_swap.h
 SRCS = push_swap.c \
 push_swap_utils.c \
+push_swap_utils_2.c \
 push_swap_rules_s.c \
 push_swap_rules_r.c \
 push_swap_rules_p.c \

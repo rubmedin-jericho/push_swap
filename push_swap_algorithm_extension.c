@@ -20,7 +20,7 @@ void cost_b(node **stack_b)
   }
 }
 
-int  find_pos(node **stack_a, int num_target)
+int  find_pos(node **stack_a, node *target)
 {
   node *tmp;
   int flag;
@@ -31,13 +31,16 @@ int  find_pos(node **stack_a, int num_target)
   tmp = (*stack_a);
   while(tmp)
   {
-    if(tmp->target > flag && tmp->num < num_target)
+    if(target->target == 0)
+      pos = find_the_last_pos(stack_a);
+    else if(tmp->target > flag && tmp->num < target->num)
     {
       flag = tmp->target;
       pos = tmp->position;
     }
     tmp = tmp->next;
   }
+  printf("\nPOS de 0: %i\n", pos);
   return (pos);
 }
 
@@ -53,40 +56,61 @@ void cost_a(node **stack_a, node **stack_b)
   size_stack = ft_size_stack(stack_a); 
   while(tmp_b)
   {
-    pos_less_than_b = find_pos(stack_a, tmp_b->num);
-    if(pos_less_than_b <= (size_stack / 2))
+    pos_less_than_b = find_pos(stack_a, tmp_b);
+    if((pos_less_than_b + 1) <= (size_stack / 2))
       tmp_b->cost_a = (pos_less_than_b + 1);
     else if(pos_less_than_b > (size_stack / 2))
     {
       cost = (pos_less_than_b + 1) - size_stack;
       tmp_b->cost_a = cost;  
     }
-    printf("NUM_VIEW: %i\nPOSITION: %i\nCOSTO: %i\n",tmp_b->num, pos_less_than_b, tmp_b->cost_a);
-    //printf("numerologia: %i\n", tmp_b->num);
     tmp_b = tmp_b->next;
   }
 }
 
+void prepare_stack_b(node *target, node **stack_b)
+{
+  if(target->cost_b <= (ft_size_stack(stack_b) / 2))
+    while(target->position != 0)
+    {
+      ra(stack_b);
+      calculate_position(stack_b);
+    }
+  else if(target->cost_b > (ft_size_stack(stack_b) / 2))
+  {
+    while(target->position != 0)
+    {
+      rra(stack_b);
+      calculate_position(stack_b);
+    }
+  }
+}
 
-void repeat_instruction(node *target, node **stack_a)
+void make_instruction(node *target, node **stack_a)
 {
   int i;
-  node *last;
 
-  last = (*stack_a);
-  while(last->next)
-    last = last->next;
   i = 0;
   if(target->cost_a > 0)
   {
     while(i++ < target->cost_a)
+    {
       ra(stack_a);
+      printf("\nSTACK_A\n");
+      print_list(*stack_a);
+    }
+    
   }
   else if(target->cost_a < 0)
   {
     target->cost_a = -(target->cost_a);
     while(i++ < target->cost_a)
+    {
       rra(stack_a);
+      printf("\nSTACK_B\n");
+      print_list(*stack_a);
+    }
   }
+
 }
 
