@@ -55,6 +55,8 @@ static void next_optimal_move(node **stack_a, node **stack_b)
     prepare_stack_b(target, stack_b);
   make_instruction(target, stack_a); 
   pa(stack_a, stack_b);
+  calculate_position(stack_a);
+  calculate_position(stack_b);
 }
 
 void sort_algorithm(node **stack_a, node **stack_b)
