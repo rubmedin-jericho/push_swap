@@ -50,7 +50,6 @@ static void next_optimal_move(node **stack_a, node **stack_b)
   node *target;
 
   target = get_optimal_node(stack_b);
-  printf("\nTARGET_VIEW: %i\n", target->num);
   if(target->position != 0)
     prepare_stack_b(target, stack_b);
   make_instruction(target, stack_a); 
@@ -59,41 +58,69 @@ static void next_optimal_move(node **stack_a, node **stack_b)
   calculate_position(stack_b);
 }
 
+//void sort_algorithm(node **stack_a, node **stack_b)
+//{
+//  int i;
+//
+//  i = 0; 
+//  while(i != 3)
+//  {  
+//    pb(stack_a, stack_b);
+//    i = ft_size_stack(stack_a);
+//  }
+//  case_3(stack_a);
+//  i = ft_size_stack(stack_b);
+//  while(i != 0)
+//  {
+//    calculate_position(stack_a);
+//    calculate_position(stack_b);
+//    cost_b(stack_b);
+//    cost_a(stack_a, stack_b);
+//    printf("\nSTACK_A\n");
+//    print_list((*stack_a));
+//    printf("\n");
+//    printf("\nSTACK_B\n");
+//    print_list((*stack_b));
+//    next_optimal_move(stack_a, stack_b);
+//    printf("\nSTACK_A_AFTER\n");
+//    print_list((*stack_a));
+//    printf("\n");
+//    printf("\nSTACK_B_AFTER\n");
+//    print_list((*stack_b));
+//    i--;
+//   // i = ft_size_stack(stack_b);
+//    printf("\n********************************\n");
+//  }
+//	reposition_stack(stack_a);
+//    printf("STACK_A_FINISH\n");
+//    print_list((*stack_a));
+//    printf("STACK_B_FINISH\n");
+//    print_list((*stack_b));
+//}
 void sort_algorithm(node **stack_a, node **stack_b)
 {
-  int i;
+	int i;
 
-  i = 0; 
-  while(i != 3)
-  {  
-    pb(stack_a, stack_b);
-    i = ft_size_stack(stack_a);
-  }
-  case_3(stack_a);
-  i = ft_size_stack(stack_b);
-  while(i != 0)
-  {
-    calculate_position(stack_a);
-    calculate_position(stack_b);
-    cost_b(stack_b);
-    cost_a(stack_a, stack_b);
-    printf("\nSTACK_A\n");
-    print_list((*stack_a));
-    printf("\n");
-    printf("\nSTACK_B\n");
-    print_list((*stack_b));
-    next_optimal_move(stack_a, stack_b);
-    printf("\nSTACK_A_AFTER\n");
-    print_list((*stack_a));
-    printf("\n");
-    printf("\nSTACK_B_AFTER\n");
-    print_list((*stack_b));
-    i--;
-   // i = ft_size_stack(stack_b);
-    printf("\n********************************\n");
-  }
-    printf("STACK_A_FINISH\n");
-    print_list((*stack_a));
-    printf("STACK_B_FINISH\n");
-    print_list((*stack_b));
+	i = 0; 
+	while(i != 3)
+	{  
+		pb(stack_a, stack_b);
+		i = ft_size_stack(stack_a);
+	}
+	case_3(stack_a);
+	i = ft_size_stack(stack_b);
+	while(i != 0)
+	{
+		calculate_position(stack_a);
+		calculate_position(stack_b);
+		cost_b(stack_b);
+		cost_a(stack_a, stack_b);
+		next_optimal_move(stack_a, stack_b);
+		i--;
+	}
+	reposition_stack(stack_a);
+    //printf("STACK_A_FINISH\n");
+    //print_list((*stack_a));
+    //printf("STACK_B_FINISH\n");
+    //print_list((*stack_b));
 }

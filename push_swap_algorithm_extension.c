@@ -40,12 +40,12 @@ int  find_pos(node **stack_a, node *target)
 		}
 		tmp = tmp->next;
 	}
-		printf("\nPosition target: %i\n", pos);
 	return (pos);
 }
-//Versiones anteriores de esta funcion
-//if((pos_less_than_b + 1) <= (size_stack / 2))
-//	tmp_b->cost_a = (pos_less_than_b + 1);
+/*Versiones anteriores de esta funcion
+if((pos_less_than_b + 1) <= (size_stack / 2))
+	tmp_b->cost_a = (pos_less_than_b + 1);
+*/
 void cost_a(node **stack_a, node **stack_b)
 {
 	node *tmp_b;
@@ -101,22 +101,14 @@ void make_instruction(node *target, node **stack_a)
 	if(target->cost_a > 0)
 	{
 		while(i++ < target->cost_a)
-		{
 			ra(stack_a);
-			printf("\nSTACK_A\n");
-			print_list(*stack_a);
-		}
 
 	}
 	else if(target->cost_a < 0)
 	{
 		target->cost_a = -(target->cost_a);
 		while(i++ < target->cost_a)
-		{
 			rra(stack_a);
-			printf("\nSTACK_B\n");
-			print_list(*stack_a);
-		}
 	}
 }
 

@@ -14,8 +14,7 @@ int find_the_last_pos(node **stack_a)
 	while(tmp)
 	{
 		if(tmp->target > flag)
-		{
-			flag = tmp->target;
+		{ flag = tmp->target;
 			pos = tmp->position;
 		}
 		tmp = tmp->next;
@@ -48,4 +47,26 @@ int	target_z_selector(int pos_in_stack_a, node **stack_a, node *target_tmp)
 	else if(pos_in_stack_a > (size_stack / 2) && target_tmp->target > tmp->target)
 		return (4);
 	return (0);
+}
+
+void reposition_stack(node **stack_a)
+{
+	node *stack_a_tmp;
+	int pos_zero;
+	int size_stack;
+	int i;
+
+	
+	i = 0;
+	size_stack = ft_size_stack(stack_a);
+	pos_zero = find_the_last_pos(stack_a);
+	stack_a_tmp = (*stack_a);
+	while(i < pos_zero)
+	{
+		if(pos_zero <= (size_stack / 2))
+			ra(stack_a);
+		else 
+			rra(stack_a);
+		i++;
+	}
 }
