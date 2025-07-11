@@ -2,115 +2,121 @@
 
 void cost_b(node **stack_b)
 {
-  node *tmp_b;
-  int cost;
+	node *tmp_b;
+	int cost;
 
-  tmp_b = (*stack_b);
-  while(tmp_b)
-  {
-    if(tmp_b->position <= (ft_size_stack(stack_b) / 2))
-      tmp_b->cost_b = tmp_b->position;
-    else if(tmp_b->position > (ft_size_stack(stack_b) / 2))
-    {
-      cost = tmp_b->position - ft_size_stack(stack_b);
-      cost = -cost;
-      tmp_b->cost_b = cost;
-    }
-    tmp_b = tmp_b->next;
-  }
+	tmp_b = (*stack_b);
+	while(tmp_b)
+	{
+		if(tmp_b->position <= (ft_size_stack(stack_b) / 2))
+			tmp_b->cost_b = tmp_b->position;
+		else if(tmp_b->position > (ft_size_stack(stack_b) / 2))
+		{
+			cost = tmp_b->position - ft_size_stack(stack_b);
+			cost = -cost;
+			tmp_b->cost_b = cost;
+		}
+		tmp_b = tmp_b->next;
+	}
 }
 
 int  find_pos(node **stack_a, node *target)
 {
-  node *tmp;
-  int flag;
-  int pos;
+	node *tmp;
+	int flag;
+	int pos;
 
-  flag = 0;
-  pos = 0;
-  tmp = (*stack_a);
-  while(tmp)
-  {
-    if(target->target == 0)
-      pos = find_the_last_pos(stack_a);
-    else if(tmp->target > flag && tmp->num < target->num)
-    {
-      flag = tmp->target;
-      pos = tmp->position;
-    }
-    tmp = tmp->next;
-  }
-  printf("\nPOS de 0: %i\n", pos);
-  return (pos);
+	pos = 0;
+	tmp = (*stack_a);
+	flag = 0;
+	while(tmp)
+	{
+		if(target->target == 0)
+			pos = find_the_last_pos(stack_a);
+		else if(tmp->target > flag && tmp->target < target->target)
+		{
+			flag = tmp->target;
+			pos = tmp->position;
+		}
+		tmp = tmp->next;
+	}
+		printf("\nPosition target: %i\n", pos);
+	return (pos);
 }
-
+//Versiones anteriores de esta funcion
+//if((pos_less_than_b + 1) <= (size_stack / 2))
+//	tmp_b->cost_a = (pos_less_than_b + 1);
 void cost_a(node **stack_a, node **stack_b)
 {
-  node *tmp_b;
-  int pos_less_than_b;
-  int size_stack;
-  int cost;
+	node *tmp_b;
+	int pos_less_than_b;
+	int size_stack;
+	int cost;
+	int	select_z;
 
-  cost = 0;
-  tmp_b = (*stack_b);
-  size_stack = ft_size_stack(stack_a); 
-  while(tmp_b)
-  {
-    pos_less_than_b = find_pos(stack_a, tmp_b);
-    if((pos_less_than_b + 1) <= (size_stack / 2))
-      tmp_b->cost_a = (pos_less_than_b + 1);
-    else if(pos_less_than_b > (size_stack / 2))
-    {
-      cost = (pos_less_than_b + 1) - size_stack;
-      tmp_b->cost_a = cost;  
-    }
-    tmp_b = tmp_b->next;
-  }
+	cost = 0;
+	tmp_b = (*stack_b);
+	size_stack = ft_size_stack(stack_a); 
+	while(tmp_b)
+	{
+		pos_less_than_b = find_pos(stack_a, tmp_b);
+		select_z = target_z_selector(pos_less_than_b, stack_a, tmp_b);
+		if(select_z == 1)
+			tmp_b->cost_a = (pos_less_than_b + 1);
+		else if(select_z == 2)
+			tmp_b->cost_a = 0;
+		else if(select_z == 3)
+			tmp_b->cost_a = pos_less_than_b - size_stack;  
+		else if(select_z == 4)
+			tmp_b->cost_a = (pos_less_than_b + 1) - size_stack;
+		tmp_b = tmp_b->next;
+	}
 }
 
 void prepare_stack_b(node *target, node **stack_b)
 {
-  if(target->cost_b <= (ft_size_stack(stack_b) / 2))
-    while(target->position != 0)
-    {
-      ra(stack_b);
-      calculate_position(stack_b);
-    }
-  else if(target->cost_b > (ft_size_stack(stack_b) / 2))
-  {
-    while(target->position != 0)
-    {
-      rra(stack_b);
-      calculate_position(stack_b);
-    }
-  }
+	if(target->cost_b <= (ft_size_stack(stack_b) / 2))
+	{
+		while(target->position != 0)
+		{
+			ra(stack_b);
+			calculate_position(stack_b);
+		}
+	}
+	else if(target->cost_b > (ft_size_stack(stack_b) / 2))
+	{
+		while(target->position != 0)
+		{
+			rra(stack_b);
+			calculate_position(stack_b);
+		}
+	}
 }
 
 void make_instruction(node *target, node **stack_a)
 {
-  int i;
+	int i;
 
-  i = 0;
-  if(target->cost_a > 0)
-  {
-    while(i++ < target->cost_a)
-    {
-      ra(stack_a);
-      printf("\nSTACK_A\n");
-      print_list(*stack_a);
-    }
-    
-  }
-  else if(target->cost_a < 0)
-  {
-    target->cost_a = -(target->cost_a);
-    while(i++ < target->cost_a)
-    {
-      rra(stack_a);
-      printf("\nSTACK_B\n");
-      print_list(*stack_a);
-    }
-  }
+	i = 0;
+	if(target->cost_a > 0)
+	{
+		while(i++ < target->cost_a)
+		{
+			ra(stack_a);
+			printf("\nSTACK_A\n");
+			print_list(*stack_a);
+		}
 
+	}
+	else if(target->cost_a < 0)
+	{
+		target->cost_a = -(target->cost_a);
+		while(i++ < target->cost_a)
+		{
+			rra(stack_a);
+			printf("\nSTACK_B\n");
+			print_list(*stack_a);
+		}
+	}
 }
 

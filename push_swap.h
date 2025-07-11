@@ -31,6 +31,7 @@ void calculate_position(node **stack);
 int find_pos(node **stack_a, node *target);
 void prepare_stack_b(node *target, node **stack_b);
 int find_the_last_pos(node **stack_a);
+int	target_z_selector(int pos_in_stack_a, node **stack_a, node *target_tmp);
 
 void cost_b(node **stack_b);
 void cost_a(node **stack_a, node **stack_b);

@@ -2,21 +2,50 @@
 
 int find_the_last_pos(node **stack_a)
 {
-  node *tmp;
-  int flag;
-  int pos;
+	node *tmp;
+	int flag;
+	int pos;
+	int size_stack;
 
-  flag = 0;
-  pos = 0;
-  tmp = (*stack_a);
-  while(tmp)
-  {
-    if(tmp->target > flag)
-    {
-      flag = tmp->target;
-      pos = tmp->position;
-    }
-    tmp = tmp->next;
-  }
-  return (pos);
+	pos = 0;
+	tmp = (*stack_a);
+	flag = tmp->target;
+	size_stack = ft_size_stack(stack_a);
+	while(tmp)
+	{
+		if(tmp->target > flag)
+		{
+			flag = tmp->target;
+			pos = tmp->position;
+		}
+		tmp = tmp->next;
+	}
+	if(pos > (size_stack / 2))
+		return (pos - size_stack);
+	return (pos + 1);
+}
+
+int	target_z_selector(int pos_in_stack_a, node **stack_a, node *target_tmp)
+{
+	int i;
+	node *tmp;
+	int size_stack;
+
+	i = 0;
+	size_stack = ft_size_stack(stack_a);
+	tmp = (*stack_a);
+	while(i < pos_in_stack_a && tmp)
+	{
+		tmp = tmp->next;
+		i++;
+	}
+	if(pos_in_stack_a <= (size_stack / 2) && target_tmp->target < tmp->target)
+		return (2);
+	else if(pos_in_stack_a > (size_stack / 2) && target_tmp->target < tmp->target)
+		return (3);
+	else if(pos_in_stack_a <= (size_stack / 2) && target_tmp->target > tmp->target)
+		return (1);
+	else if(pos_in_stack_a > (size_stack / 2) && target_tmp->target > tmp->target)
+		return (4);
+	return (0);
 }
