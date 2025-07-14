@@ -62,15 +62,16 @@ static void	next_optimal_move(t_node **stack_a, t_node **stack_b)
 	t_node	*target;
 
 	target = get_optimal_t_node(stack_b);
+	printf("\nTARGET: %i\n", target->num);
 	if (target->position != 0)
-		prepare_stack_b(target, stack_b);
+		prepare_stacks(target, stack_a, stack_b);
 	make_instruction(target, stack_a);
 	pa(stack_a, stack_b);
 	calculate_position(stack_a);
 	calculate_position(stack_b);
 }
 
-/*
+
 void sort_algorithm(t_node **stack_a, t_node **stack_b)
 {
   int i;
@@ -89,10 +90,10 @@ void sort_algorithm(t_node **stack_a, t_node **stack_b)
     calculate_position(stack_b);
     cost_b(stack_b);
     cost_a(stack_a, stack_b);
-    printf("\nSTACK_A\n");
+    printf("\n\n\n\n\n\n\nSTACK_A\n");
     print_list((*stack_a));
     printf("\n");
-    printf("\nSTACK_B\n");
+    printf("\nSTACK_B\n\n\n\n\n\n");
     print_list((*stack_b));
     next_optimal_move(stack_a, stack_b);
     printf("\nSTACK_A_AFTER\n");
@@ -110,8 +111,8 @@ void sort_algorithm(t_node **stack_a, t_node **stack_b)
     printf("STACK_B_FINISH\n");
     print_list((*stack_b));
 }
-*/
 
+/*
 void	sort_algorithm(t_node **stack_a, t_node **stack_b)
 {
 	int	i;
@@ -135,3 +136,4 @@ void	sort_algorithm(t_node **stack_a, t_node **stack_b)
 	}
 	reposition_stack(stack_a);
 }
+*/

@@ -56,10 +56,10 @@ static int	push_swap(char **argv, int argc)
 		case_4(&stack_a, &stack_b);
 	else if (argc == 6)
 		case_5(&stack_a, &stack_b);
-/*
+
 	print_list(stack_a);
 	print_list(stack_b);
-*/
+
 	free_list(stack_a);
 	return (0);
 }

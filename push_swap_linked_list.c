@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-/*
 void	print_list(t_node *stack)
 {
 	while (stack != NULL)
@@ -20,7 +19,6 @@ void	print_list(t_node *stack)
 		stack = stack->next;
 	}
 }
-*/
 
 void	free_list(t_node *stack)
 {

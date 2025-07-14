@@ -6,7 +6,7 @@
 /*   By: rubmedin <rubmedin@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 10:26:26 by rubmedin          #+#    #+#             */
-/*   Updated: 2025/07/14 17:06:33 by rubmedin         ###   ########.fr       */
+/*   Updated: 2025/07/14 10:26:30 by rubmedin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,22 @@ void	cost_a(t_node **stack_a, t_node **stack_b)
 
 void	prepare_stacks(t_node *target, t_node **stack_a, t_node **stack_b)
 {
+	if (target->cost_b <= (ft_size_stack(stack_b) / 2))
+	{
+		while (target->position != 0)
+		{
+			ra(stack_b);
+			calculate_position(stack_b);
+		}
+	}
+	else if (target->cost_b > (ft_size_stack(stack_b) / 2))
+	{
+		while (target->position != 0)
+		{
+			rra(stack_b);
+			calculate_position(stack_b);
+		}
+	}
 	prepare_stack_b(target, stack_b);
 	prepare_stack_a(target, stack_a);
 }

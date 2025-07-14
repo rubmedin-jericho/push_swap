@@ -6,7 +6,7 @@
 /*   By: rubmedin <rubmedin@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 10:27:09 by rubmedin          #+#    #+#             */
-/*   Updated: 2025/07/14 12:09:30 by rubmedin         ###   ########.fr       */
+/*   Updated: 2025/07/14 17:10:46 by rubmedin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,12 @@ int		ft_size_stack(t_node **stack_a);
 void	make_instruction(t_node *target, t_node **stack_a);
 void	calculate_position(t_node **stack);
 int		find_pos(t_node **stack_a, t_node *target);
-void	prepare_stack_b(t_node *target, t_node **stack_b);
+void	prepare_stacks(t_node *target, t_node **stack_a, t_node **stack_b);
 int		find_the_last_pos(t_node **stack_a);
 int		target_z_selector(int pos_in_stack_a, t_node **stack_a, t_node *target_tmp);
 void	reposition_stack(t_node **stack_a);
+void	prepare_stack_a(t_node *target, t_node **stack_a);
+void	prepare_stack_b(t_node *target, t_node **stack_a);
 
 void	cost_b(t_node **stack_b);
 void	cost_a(t_node **stack_a, t_node **stack_b);
@@ -65,5 +67,5 @@ void	rra(t_node **stack);
 void	rrb(t_node **stack);
 void	rrr(t_node **stack_a, t_node **stack_b);
 // borrar apartir de aqui son funciones para probar.
-//void	print_list(t_node *stack);
+void	print_list(t_node *stack);
 #endif

@@ -10,7 +10,8 @@ push_swap_rules_r.c \
 push_swap_rules_p.c \
 push_swap_rules_rr.c \
 push_swap_algorithm.c \
-push_swap_algorithm_extension.c \
+push_swap_algorithm_2.c \
+push_swap_algorithm_3.c \
 push_swap_linked_list.c \
 push_swap_sort_case.c
 
