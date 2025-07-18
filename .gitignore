@@ -1,5 +1,6 @@
 *.o
 push_swap
 tester.py
-trace.txt
 checker_linux
+*.txt
+*.sh
