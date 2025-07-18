@@ -45,7 +45,7 @@ int	find_pos(t_node **stack_a, t_node *target)
 	{
 		if (target->target == 0)
 			pos = find_the_last_pos(stack_a);
-		else if (tmp->target > flag && tmp->target < target->target)
+		else if (tmp->target >= flag && tmp->target < target->target)
 		{
 			flag = tmp->target;
 			pos = tmp->position;
@@ -69,6 +69,7 @@ void	cost_a(t_node **stack_a, t_node **stack_b)
 	while (tmp_b)
 	{
 		pos_less_than_b = find_pos(stack_a, tmp_b);
+		printf("\n************** POS: %i **************\n", pos_less_than_b);
 		select_z = target_z_selector(pos_less_than_b, stack_a, tmp_b);
 		if (select_z == 1)
 			tmp_b->cost_a = (pos_less_than_b + 1);

@@ -56,10 +56,12 @@ static int	push_swap(char **argv, int argc)
 		case_4(&stack_a, &stack_b);
 	else if (argc == 6)
 		case_5(&stack_a, &stack_b);
-
+	reposition_stack(&stack_a);
+	printf("\n********* FINISH *********\n");
+	printf("\nSTACK_A\n");
 	print_list(stack_a);
+	printf("\nSTACK_B\n");
 	print_list(stack_b);
-
 	free_list(stack_a);
 	return (0);
 }
@@ -82,12 +84,12 @@ int	main(int argc, char **argv)
 {
 	if (argc < 2)
 	{
-		//write(1, "Error few args\n", 15);
+		write(1, "Error few args\n", 15);
 		return (2);
 	}
 	if (verify_arg(argv, argc))
 	{
-		//write(1, "Error with args\n", 16);
+		write(1, "Error with args\n", 16);
 		return (2);
 	}
 	if (push_swap(argv, argc))

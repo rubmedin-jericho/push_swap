@@ -64,21 +64,13 @@ int	target_z_selector(int pos_a, t_node **stack_a, t_node *tar_tmp)
 
 void	reposition_stack(t_node **stack_a)
 {
-	t_node	*stack_a_tmp;
-	int		pos_zero;
-	int		size_stack;
-	int		i;
+	int	size_stack;
 
-	i = 0;
 	size_stack = ft_size_stack(stack_a);
-	pos_zero = find_the_last_pos(stack_a);
-	stack_a_tmp = (*stack_a);
-	while (i < pos_zero)
-	{
-		if (pos_zero <= (size_stack / 2))
+	if((*stack_a)->target <= (size_stack / 2))
+		while((*stack_a)->target != 0)
 			ra(stack_a);
-		else
+	else if((*stack_a)->target > (size_stack / 2))
+		while((*stack_a)->target != 0)
 			rra(stack_a);
-		i++;
-	}
 }
