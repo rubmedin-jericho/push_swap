@@ -12,6 +12,7 @@ push_swap_rules_rr.c \
 push_swap_algorithm.c \
 push_swap_algorithm_2.c \
 push_swap_algorithm_3.c \
+push_swap_algorithm_4.c \
 push_swap_linked_list.c \
 push_swap_sort_case.c
 

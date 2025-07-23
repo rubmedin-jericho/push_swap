@@ -6,7 +6,7 @@
 /*   By: rubmedin <rubmedin@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 10:27:09 by rubmedin          #+#    #+#             */
-/*   Updated: 2025/07/14 17:10:46 by rubmedin         ###   ########.fr       */
+/*   Updated: 2025/07/23 17:34:21 by rubmedin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef struct stack
 	int				target;
 	int				cost_a;
 	int				cost_b;
-	int				objective;
+	struct stack	*objective;
 	struct stack	*next;
 }	t_node;
 
@@ -41,9 +41,9 @@ void	index_assign(t_node **stack);
 int		ft_size_stack(t_node **stack_a);
 void	make_instruction(t_node *target, t_node **stack_a);
 void	calculate_position(t_node **stack);
-int		find_pos(t_node **stack_a, t_node *target);
+t_node	*find_pos(t_node **stack_a, t_node *target);
 void	prepare_stacks(t_node *target, t_node **stack_a, t_node **stack_b);
-int		find_the_last_pos(t_node **stack_a);
+t_node	*find_the_last_pos(t_node **stack_a);
 int		target_z_selector(int pos_in_stack_a, t_node **stack_a, t_node *target_tmp);
 void	reposition_stack(t_node **stack_a);
 void	prepare_stack_a(t_node *target, t_node **stack_a);
@@ -54,6 +54,9 @@ void	find_objective(t_node **stack_a, t_node **stack_b);
 void	calculate_cost_stack(t_node **stack_a, t_node **stack_b, int flag);
 void	cost_b(t_node **stack_b);
 void	cost_a(t_node **stack_a, t_node **stack_b);
+void	prepare_stack_normal(t_node *target, t_node **stack_a, t_node **stack_b);
+void	prepare_stack_reverse(t_node *target, t_node **stack_a, t_node **stack_b);
+int		checker_and_reverse(int	nbr);
 
 void	case_2(t_node **stack);
 void	case_3(t_node **stack);

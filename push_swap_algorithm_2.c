@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap_algorithm_extension.c                    :+:      :+:    :+:   */
+/*   push_swap_algorithm_2.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rubmedin <rubmedin@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 10:26:26 by rubmedin          #+#    #+#             */
-/*   Updated: 2025/07/14 10:26:30 by rubmedin         ###   ########.fr       */
+/*   Updated: 2025/07/23 20:01:18 by rubmedin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,57 +33,49 @@ void	cost_b(t_node **stack_b)
 }
 
 //int	find_pos(t_node **stack_a, t_node *target)
-int	find_pos(t_node **stack_a, t_node *target)
+
+int	search_low_index(t_node **stack_a)
 {
 	t_node	*tmp;
-	int		flag;
-	int		pos;
+	int		target_rtn;
 
-	pos = 0;
+	target_rtn = (*stack_a)->target;
 	tmp = (*stack_a);
-	flag = 0;
+	while(tmp)
+	{
+		//ESTA FUNCION PETA AQUI.
+		if(tmp->target < target_rtn)
+			target_rtn = tmp->target;
+		tmp = tmp->next;
+	}
+	return (target_rtn);
+}
+
+t_node	*find_pos(t_node **stack_a, t_node *target)
+{
+	t_node	*tmp;
+	//int		flag;
+	t_node	*t_node_return;
+
+	t_node_return = (*stack_a);
+	tmp = (*stack_a);
+	//flag = 0;
 	while (tmp)
 	{
+		//else if (tmp->target >= flag && tmp->target < target->target)
 		if (target->target == 0)
-			pos = find_the_last_pos(stack_a);
-		else if (tmp->target >= flag && tmp->target < target->target)
+			t_node_return = find_the_last_pos(stack_a);
+		//LA LINIA DE ABAJO ES LA QUE TIENES QUE CAMBIAR, ESTA CAMBIADA PERO NO FUNCIONA PUEDE SER POR LA FUNCION.
+		else if (tmp->target == search_low_index(stack_a))
 		{
-			flag = tmp->target;
-			pos = tmp->position;
+			//flag = tmp->target;
+			t_node_return = tmp;
 		}
 		tmp = tmp->next;
 	}
-	return (pos);
+	return (t_node_return);
 }
 
-/*void	cost_a(t_node **stack_a, t_node **stack_b)
-{
-	t_node	*tmp_b;
-	int		pos_less_than_b;
-	int		size_stack;
-	int		cost;
-	int		select_z;
-
-	cost = 0;
-	tmp_b = (*stack_b);
-	size_stack = ft_size_stack(stack_a);
-	while (tmp_b)
-	{
-		pos_less_than_b = find_pos(stack_a, tmp_b);
-		printf("\n************** POS: %i **************\n", pos_less_than_b);
-		select_z = target_z_selector(pos_less_than_b, stack_a, tmp_b);
-		if (select_z == 1)
-			tmp_b->cost_a = (pos_less_than_b + 1);
-		else if (select_z == 2)
-			tmp_b->cost_a = 0;
-		else if (select_z == 3)
-			tmp_b->cost_a = pos_less_than_b - size_stack;
-		else if (select_z == 4)
-			tmp_b->cost_a = (pos_less_than_b + 1) - size_stack;
-		tmp_b = tmp_b->next;
-	}
-}
-*/
 void	cost_a(t_node **stack_a, t_node **stack_b)
 {
 	t_node	*tmp;
@@ -93,39 +85,33 @@ void	cost_a(t_node **stack_a, t_node **stack_b)
 	size_stack = ft_size_stack(stack_a);
 	while (tmp)
 	{
-		printf("\ntmp: %i, objective: %i\n",tmp->target, tmp->objective);
-		if (tmp->objective <= (size_stack / 2) && tmp->objective > 0)
-			tmp->cost_a = (tmp->objective + 1);
-		else if (tmp->objective > (size_stack / 2))
+		calculate_position(stack_a);
+		if (tmp->objective->position <= (size_stack / 2) && tmp->objective->position >= 0)
 		{
-			tmp->cost_a = tmp->objective - size_stack;
+			tmp->cost_a = tmp->objective->position;
+			//editar la linia de abajo cuando la struct en vez de usar el objective use el t_node
+			if (tmp->objective->target < tmp->target)
+				tmp->cost_a += 1;
+		}
+		else if (tmp->objective->position > (size_stack / 2))
+		{
+			tmp->cost_a = tmp->objective->position - size_stack;
 			if(tmp->cost_a == -1)
 				tmp->cost_a = 0;
 		}
+		printf("\n--- TARGET_B: %i\n--- OBJETIVO_POS: %i\n", tmp->target, tmp->objective->position);
 		tmp = tmp->next;
 	}
 }
 
 void	prepare_stacks(t_node *target, t_node **stack_a, t_node **stack_b)
 {
-	if (target->cost_b <= (ft_size_stack(stack_b) / 2))
-	{
-		while (target->position != 0)
-		{
-			ra(stack_b);
-			calculate_position(stack_b);
-		}
-	}
-	else if (target->cost_b > (ft_size_stack(stack_b) / 2))
-	{
-		while (target->position != 0)
-		{
-			rra(stack_b);
-			calculate_position(stack_b);
-		}
-	}
-	prepare_stack_b(target, stack_b);
-	prepare_stack_a(target, stack_a);
+	//if (target->cost_b <= (ft_size_stack(stack_b) / 2))
+	//else if (target->cost_b > (ft_size_stack(stack_b) / 2))
+	if (target->cost_b > 0)
+		prepare_stack_normal(target, stack_a, stack_b);
+	else if (target->cost_b < 0)
+		prepare_stack_reverse(target, stack_a, stack_b);
 }
 
 void	make_instruction(t_node *target, t_node **stack_a)

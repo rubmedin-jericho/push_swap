@@ -6,35 +6,34 @@
 /*   By: rubmedin <rubmedin@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 10:37:47 by rubmedin          #+#    #+#             */
-/*   Updated: 2025/07/14 10:46:24 by rubmedin         ###   ########.fr       */
+/*   Updated: 2025/07/23 18:19:54 by rubmedin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	find_the_last_pos(t_node **stack_a)
+t_node	*find_the_last_pos(t_node **stack_a)
 {
-	t_node	*tmp;
-	int		flag;
-	int		pos;
-	int		size_stack;
+	t_node			*tmp;
+	int				flag;
+	t_node	*t_node_return;
+	//int				size_stack;
 
-	pos = 0;
 	tmp = (*stack_a);
 	flag = tmp->target;
-	size_stack = ft_size_stack(stack_a);
+	//size_stack = ft_size_stack(stack_a);
 	while (tmp)
 	{
 		if (tmp->target > flag)
 		{
 			flag = tmp->target;
-			pos = tmp->position;
+			t_node_return = tmp;
 		}
 		tmp = tmp->next;
 	}
-	if (pos > (size_stack / 2))
-		return (pos - size_stack);
-	return (pos + 1);
+	//if (t_node_return->position > (size_stack / 2))
+	//	return (pos - size_stack);
+	return (t_node_return);
 }
 
 int	target_z_selector(int pos_target, t_node **stack_a, t_node *node_tmp)
@@ -73,4 +72,42 @@ void	reposition_stack(t_node **stack_a)
 	else if((*stack_a)->target > (size_stack / 2))
 		while((*stack_a)->target != 0)
 			rra(stack_a);
+}
+
+void	prepare_stack_normal(t_node *target, t_node **stack_a, t_node **stack_b)
+{
+	while (target->position != 0)
+	{
+		if(target->cost_b > 0 && target->cost_a > 0)
+		{
+			rr(stack_a, stack_b);
+			target->cost_a -= 1;
+			target->cost_b -= 1;
+		}
+		else
+		{
+			rb(stack_b);
+			target->cost_b -= 1;
+		}
+		calculate_position(stack_b);
+	}
+}
+
+void	prepare_stack_reverse(t_node *target, t_node **stack_a, t_node **stack_b)
+{
+	while (target->position != 0)
+	{
+		if(target->cost_b < 0 && target->cost_a < 0)
+		{
+			rrr(stack_a, stack_b);
+			target->cost_a += 1;
+			target->cost_b += 1;
+		}
+		else
+		{
+			rrb(stack_b);
+			target->cost_b += 1;
+		}
+		calculate_position(stack_b);
+	}
 }
