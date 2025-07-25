@@ -12,12 +12,12 @@
 
 #include "push_swap.h"
 
-int	ft_size_stack(t_node **stack_a)
+int	ft_size_stack(t_node *stack_a)
 {
 	int		i;
 	t_node	*stack_tmp;
 
-	stack_tmp = *stack_a;
+	stack_tmp = stack_a;
 	i = 0;
 	while (stack_tmp)
 	{
@@ -74,12 +74,11 @@ static void	next_optimal_move(t_node **stack_a, t_node **stack_b)
 	target = get_optimal_t_node(stack_b, a_void, b_void);
 	if (target->position != 0)
 		prepare_stacks(target, stack_a, stack_b);
-	make_instruction(target, stack_a);
+	make_instruction(target, stack_a, stack_b);
 	pa(stack_a, stack_b);
 	calculate_position(stack_a);
 	calculate_position(stack_b);
 }
-
 
 void sort_algorithm(t_node **stack_a, t_node **stack_b)
 {
@@ -87,18 +86,18 @@ void sort_algorithm(t_node **stack_a, t_node **stack_b)
 
   i = 0; 
 	printf("\n&&&&&&& PUSH_B &&&&&&\n");
-  while(i != 3)
-  {  
-    pb(stack_a, stack_b);
-    i = ft_size_stack(stack_a);
-  }
+	while(i != 3)
+	{
+		pb(stack_a, stack_b);
+		i = ft_size_stack(*stack_a);
+	}
 	printf("\n&&&&&&& STACK_A INIT &&&&&&\n");
 	print_list(*stack_a);
 	printf("\n&&&&&&& STACK_B INIT &&&&&&\n");
 	print_list(*stack_b);
 	printf("\n&&&&&&& CASE_3 &&&&&&\n");
   case_3(stack_a);
-  i = ft_size_stack(stack_b);
+  i = ft_size_stack(*stack_b);
   while(i != 0)
   {
     calculate_position(stack_a);
@@ -125,6 +124,7 @@ void	find_objective(t_node **stack_a, t_node **stack_b)
 	while(tmp_b)
 	{
 		tmp_b->objective = find_pos(stack_a, tmp_b);
+		printf("\n---tmp_b_target: %i---\n---objective_target: %i\n", tmp_b->target, tmp_b->objective->target);
 		tmp_b = tmp_b->next;
 	}
 }

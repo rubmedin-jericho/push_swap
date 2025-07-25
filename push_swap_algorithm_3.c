@@ -14,7 +14,7 @@
 
 void prepare_stack_a(t_node *target, t_node **stack_a)
 {
-	if (target->cost_a <= (ft_size_stack(stack_a) / 2))
+	if (target->cost_a <= (ft_size_stack(*stack_a) / 2))
 	{
 		while (target->position != 0)
 		{
@@ -22,7 +22,7 @@ void prepare_stack_a(t_node *target, t_node **stack_a)
 			calculate_position(stack_a);
 		}
 	}
-	else if (target->cost_a > (ft_size_stack(stack_a) / 2))
+	else if (target->cost_a > (ft_size_stack(*stack_a) / 2))
 	{
 		while (target->position != 0)
 		{
@@ -34,7 +34,7 @@ void prepare_stack_a(t_node *target, t_node **stack_a)
 
 void prepare_stack_b(t_node *target, t_node **stack_b)
 {
-	if (target->cost_b <= (ft_size_stack(stack_b) / 2))
+	if (target->cost_b <= (ft_size_stack(*stack_b) / 2))
 	{
 		while (target->position != 0)
 		{
@@ -42,7 +42,7 @@ void prepare_stack_b(t_node *target, t_node **stack_b)
 			calculate_position(stack_b);
 		}
 	}
-	else if (target->cost_b > (ft_size_stack(stack_b) / 2))
+	else if (target->cost_b > (ft_size_stack(*stack_b) / 2))
 	{
 		while (target->position != 0)
 		{

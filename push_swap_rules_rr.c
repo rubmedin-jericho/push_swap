@@ -82,5 +82,5 @@ void	rrr(t_node **stack_a, t_node **stack_b)
 {
 	rra_modify(stack_a);
 	rrb_modify(stack_b);
-	write(1, "rrr\n", 1);
+	write(1, "rrr\n", 4);
 }

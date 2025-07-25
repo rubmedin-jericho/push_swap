@@ -16,11 +16,11 @@ t_node	*find_the_last_pos(t_node **stack_a)
 {
 	t_node			*tmp;
 	int				flag;
-	t_node	*t_node_return;
+	t_node			*t_node_return;
 	//int				size_stack;
-
+	//Arregla esta funcion porque a la hora de rellenar con target 0 hace segmentation fault
 	tmp = (*stack_a);
-	flag = tmp->target;
+	flag = 0;
 	//size_stack = ft_size_stack(stack_a);
 	while (tmp)
 	{
@@ -43,7 +43,7 @@ int	target_z_selector(int pos_target, t_node **stack_a, t_node *node_tmp)
 	int		size_stack;
 
 	i = 0;
-	size_stack = ft_size_stack(stack_a);
+	size_stack = ft_size_stack(*stack_a);
 	tmp = (*stack_a);
 	while (i < pos_target && tmp)
 	{
@@ -65,7 +65,7 @@ void	reposition_stack(t_node **stack_a)
 {
 	int	size_stack;
 
-	size_stack = ft_size_stack(stack_a);
+	size_stack = ft_size_stack(*stack_a);
 	if((*stack_a)->target <= (size_stack / 2))
 		while((*stack_a)->target != 0)
 			ra(stack_a);
@@ -74,40 +74,35 @@ void	reposition_stack(t_node **stack_a)
 			rra(stack_a);
 }
 
-void	prepare_stack_normal(t_node *target, t_node **stack_a, t_node **stack_b)
+//void	prepare_stack_normal(t_node *target, t_node **stack_a, t_node **stack_b)
+void	prepare_stack_normal(t_node *target, t_node **stack_b)
 {
 	while (target->position != 0)
 	{
-		if(target->cost_b > 0 && target->cost_a > 0)
-		{
-			rr(stack_a, stack_b);
-			target->cost_a -= 1;
-			target->cost_b -= 1;
-		}
-		else
-		{
-			rb(stack_b);
-			target->cost_b -= 1;
-		}
+		//if(target->cost_b > 0 && target->cost_a > 0)
+		//{
+		//	rr(stack_a, stack_b);
+		//	target->cost_a -= 1;
+		//	target->cost_b -= 1;
+		//}
+		rb(stack_b);
+		target->cost_b -= 1;
 		calculate_position(stack_b);
 	}
 }
 
-void	prepare_stack_reverse(t_node *target, t_node **stack_a, t_node **stack_b)
+void	prepare_stack_reverse(t_node *target, t_node **stack_b)
 {
 	while (target->position != 0)
 	{
-		if(target->cost_b < 0 && target->cost_a < 0)
-		{
-			rrr(stack_a, stack_b);
-			target->cost_a += 1;
-			target->cost_b += 1;
-		}
-		else
-		{
-			rrb(stack_b);
-			target->cost_b += 1;
-		}
+		//if(target->cost_b < 0 && target->cost_a < 0)
+		//{
+		//	rrr(stack_a, stack_b);
+		//	target->cost_a += 1;
+		//	target->cost_b += 1;
+		//}
+		rrb(stack_b);
+		target->cost_b += 1;
 		calculate_position(stack_b);
 	}
 }
