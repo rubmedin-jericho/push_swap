@@ -74,6 +74,10 @@ static void	next_optimal_move(t_node **stack_a, t_node **stack_b)
 	target = get_optimal_t_node(stack_b, a_void, b_void);
 	if (target->position != 0)
 		prepare_stacks(target, stack_a, stack_b);
+	printf("\nSTACK_A\n");
+	print_list(*stack_a);
+	printf("\nSTACK_A\n");
+	print_list(*stack_b);
 	make_instruction(target, stack_a, stack_b);
 	pa(stack_a, stack_b);
 	calculate_position(stack_a);
@@ -103,10 +107,10 @@ void sort_algorithm(t_node **stack_a, t_node **stack_b)
     calculate_position(stack_a);
     calculate_position(stack_b);
 	fill_node(stack_a, stack_b);
-	printf("\n&&&&&&& STACK_A &&&&&&\n");
-	print_list(*stack_a);
-	printf("\n&&&&&&& STACK_B &&&&&&\n");
-	print_list(*stack_b);
+	//printf("\n&&&&&&& STACK_A &&&&&&\n");
+	//print_list(*stack_a);
+	//printf("\n&&&&&&& STACK_B &&&&&&\n");
+	//print_list(*stack_b);
     next_optimal_move(stack_a, stack_b);
 	printf("\n&&&&&&& STACK_A FINISH &&&&&&\n");
 	print_list(*stack_a);

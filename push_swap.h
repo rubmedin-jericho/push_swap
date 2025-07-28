@@ -57,6 +57,8 @@ void	cost_a(t_node **stack_a, t_node **stack_b);
 void	prepare_stack_normal(t_node *target, t_node **stack_b);
 void	prepare_stack_reverse(t_node *target, t_node **stack_b);
 int		checker_and_reverse(int	nbr);
+t_node	*sucessor_node(t_node *tmp, t_node *target);
+t_node *search_node(t_node *head, t_node *target);
 
 void	case_2(t_node **stack);
 void	case_3(t_node **stack);

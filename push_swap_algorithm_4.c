@@ -18,3 +18,4 @@ int	checker_and_reverse(int	nbr)
 		nbr = -(nbr);
 	return (nbr);
 }
+

@@ -72,30 +72,56 @@ void	restart_vars(t_node **tmp, t_node **node_rtn, t_node *stack_a)
 		*node_rtn = stack_a;
 }
 
-t_node	*search_node(t_node **stc_a,t_node *n_rtn,t_node *flag, t_node *target)
-{
-	t_node	*tmp;
+//t_node	*search_node(t_node **stc_a,t_node *n_rtn,t_node *flag, t_node *target)
+//{
+//	t_node	*tmp;
+//
+//	tmp = (*stc_a);
+//	while(tmp)
+//	{
+//		if(tmp->target < target->target && tmp->target >= flag->target)
+//		{
+//			n_rtn = tmp;
+//			flag = tmp;
+//		}
+//		tmp = tmp->next;
+//	}
+//	if (n_rtn == NULL)
+//		restart_vars(&tmp, &n_rtn, (*stc_a));
+//	//while(tmp)
+//	//{
+//	//	//if(tmp->target > target->target && tmp->target < n_rtn->target)
+//	//	if(tmp->target > target->target && tmp->target > n_rtn->target)
+//	//		n_rtn = tmp;
+//	//	tmp = tmp->next;
+//	//}
+//	return (n_rtn);
+//}
 
-	tmp = (*stc_a);
-	while(tmp)
+t_node *search_node(t_node *head, t_node *target)
+{
+	t_node *tmp = head;
+	t_node *best_smaller = NULL;
+	t_node *smallest_bigger = NULL;
+
+	while (tmp)
 	{
-		if(tmp->target < target->target && tmp->target >= flag->target)
+		if (tmp->target < target->target)
 		{
-			n_rtn = tmp;
-			flag = tmp;
+			if (!best_smaller || tmp->target > best_smaller->target)
+				best_smaller = tmp;
+		}
+		else if (tmp->target > target->target)
+		{
+			if (!smallest_bigger || tmp->target < smallest_bigger->target)
+				smallest_bigger = tmp;
 		}
 		tmp = tmp->next;
 	}
-	if(n_rtn == NULL)
-		restart_vars(&tmp, &n_rtn, (*stc_a));
-	while(tmp)
-	{
-		//if(tmp->target > target->target && tmp->target < n_rtn->target)
-		if(tmp->target > target->target)
-			n_rtn = tmp;
-		tmp = tmp->next;
-	}
-	return (n_rtn);
+	if (best_smaller)
+		return best_smaller;
+	else
+		return smallest_bigger;
 }
 
 t_node	*find_pos(t_node **stack_a, t_node *target)
@@ -104,7 +130,7 @@ t_node	*find_pos(t_node **stack_a, t_node *target)
 	t_node	*t_node_return;
 	t_node	*node_tmp;
 
-	node_tmp = search_node(stack_a, NULL, (*stack_a), target);
+	node_tmp = search_node((*stack_a), target);
 	t_node_return = (*stack_a);
 	tmp = (*stack_a);
 	while (tmp)
@@ -128,19 +154,22 @@ void	cost_a(t_node **stack_a, t_node **stack_b)
 	while (tmp)
 	{
 		calculate_position(stack_a);
-		if ((tmp->objective->position + 1) <= (size_stack / 2))
+		if (tmp->objective->position <= (size_stack / 2))
 		{
 			tmp->cost_a = tmp->objective->position + 1;
-			if(tmp->objective->target > tmp->target)
-			{
-				if(tmp->objective->position < tmp->target)
-					tmp->cost_a += 1;
-			}
+			if (tmp->objective->target < tmp->target)
+				tmp->cost_a += 1;
+			else if (tmp->objective->target > tmp->target)
+				tmp->cost_a -= 1;
 		}
-		else if ((tmp->objective->position + 1) > (size_stack / 2))
+		else if (tmp->objective->position > (size_stack / 2))
 		{
-				tmp->cost_a = (tmp->objective->position - size_stack) + 1;
+			tmp->cost_a = ((tmp->objective->position) - size_stack);
+			if(tmp->cost_a == -1)
+				tmp->cost_a = 0;
 		}
+		if(tmp->target == 15)
+			printf("\ntmp: 15 --- tmp-cost_a: %i\n",  );
 		tmp = tmp->next;
 	}
 }
@@ -158,6 +187,7 @@ void	make_instruction(t_node *target, t_node **stack_a, t_node **stack_b)
 {
 	int	i;
 
+	(void)stack_b;
 	i = 0;
 	if (target->cost_a > 0)
 	{
@@ -165,7 +195,7 @@ void	make_instruction(t_node *target, t_node **stack_a, t_node **stack_b)
 		{
 			ra(stack_a);
 			calculate_position(stack_a);
-			calculate_cost_stack(stack_a, stack_b, 0);
+			//calculate_cost_stack(stack_a, stack_b, 0);
 		}
 
 	}
@@ -176,11 +206,7 @@ void	make_instruction(t_node *target, t_node **stack_a, t_node **stack_b)
 		{
 			rra(stack_a);
 			calculate_position(stack_a);
-			calculate_cost_stack(stack_a, stack_b, 0);
-			printf("\nSTACK_A\n");
-			print_list(*stack_a);
-			printf("\nSTACK_B\n");
-			print_list(*stack_b);
+			//calculate_cost_stack(stack_a, stack_b, 0);
 		}
 	}
 }
