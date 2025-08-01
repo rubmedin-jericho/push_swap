@@ -144,6 +144,22 @@ t_node	*find_pos(t_node **stack_a, t_node *target)
 	return (t_node_return);
 }
 
+int	upper_node_stack(t_node *stack_a)
+{
+	int	target_num;
+	t_node	*tmp;
+
+	tmp = stack_a;
+	target_num = tmp->target;
+	while(tmp)
+	{
+		if(target_num > tmp->target)
+			target_num = tmp->target;
+		tmp = tmp->next;
+	}
+	return (target_num);
+}
+
 void	cost_a(t_node **stack_a, t_node **stack_b)
 {
 	t_node	*tmp;
@@ -157,19 +173,41 @@ void	cost_a(t_node **stack_a, t_node **stack_b)
 		if (tmp->objective->position <= (size_stack / 2))
 		{
 			tmp->cost_a = tmp->objective->position + 1;
-			if (tmp->objective->target < tmp->target)
-				tmp->cost_a += 1;
-			else if (tmp->objective->target > tmp->target)
-				tmp->cost_a -= 1;
+			//if (tmp->objective->target < tmp->target)
+			//	tmp->cost_a += 1;
+			//if (tmp->objective->target > tmp->target)
+			//	tmp->cost_a -= 1;
+			if (tmp->objective->target > tmp->target)
+			{
+				if(upper_node_stack((*stack_a)) == tmp->objective->target)
+					tmp->cost_a -= 1;
+			}
 		}
 		else if (tmp->objective->position > (size_stack / 2))
 		{
 			tmp->cost_a = ((tmp->objective->position) - size_stack);
-			if(tmp->cost_a == -1)
+			//if (tmp->cost_a == -1)
+			//if (tmp->cost_a == -1 && tmp->objective->target > tmp->target)
+			
+			if (tmp->cost_a == -1 && tmp->objective->target < tmp->target)
 				tmp->cost_a = 0;
+			else if (tmp->objective->target < tmp->target)
+				tmp->cost_a += 1;
+			else if (tmp->objective->target > tmp->target && \
+					(tmp->objective->position + (-1 * tmp->cost_a)) >= size_stack)
+				tmp->cost_a += 1;
+			//else if (((tmp->objective->position + -(tmp->cost_a)) - size_stack) == 0 && \
+			//	tmp->target < tmp->objective->target)
+			//	tmp->cost_a += 1;
+			else if (((tmp->objective->position + 1) -  size_stack == -1) && \
+				tmp->objective->target < tmp->target) 
+				tmp->cost_a += 1;
+			//else if	(tmp->cost_a < -1)
+			//	tmp->cost_a += 1;
+			//else if ((tmp->objective->position + 1) -  size_stack == -1) 
+			//else if (tmp->objective->target < tmp->target)
+			//	tmp->cost_a += 1;
 		}
-		if(tmp->target == 15)
-			printf("\ntmp: 15 --- tmp-cost_a: %i\n",  );
 		tmp = tmp->next;
 	}
 }

@@ -12,6 +12,27 @@
 
 #include "push_swap.h"
 
+void	recuento_del_stack(t_node *stack_a)
+{
+	t_node	*tmp;
+	int		i;
+	int		size_stack;
+
+	i = 0;
+	size_stack = ft_size_stack(stack_a);
+	tmp = stack_a;
+	while(tmp)
+	{
+		if (i == tmp->target)
+			i++;
+		tmp = tmp->next;
+	}
+	if(i == ft_size_stack(stack_a))
+		printf("\n********* OK ********\n");
+	else	
+		printf("\n********* MAL KO TARGET: %i ********\n", i);
+}
+
 static int	verify_num(t_node *stack_a)
 {
 	t_node	*t_node_tmp;
@@ -56,12 +77,13 @@ static int	push_swap(char **argv, int argc)
 		case_4(&stack_a, &stack_b);
 	else if (argc == 6)
 		case_5(&stack_a, &stack_b);
-	//reposition_stack(&stack_a);
+	reposition_stack(&stack_a);
 	printf("\n********* FINISH *********\n");
 	printf("\nSTACK_A\n");
 	print_list(stack_a);
 	printf("\nSTACK_B\n");
 	print_list(stack_b);
+	recuento_del_stack(stack_a);
 	free_list(stack_a);
 	return (0);
 }
