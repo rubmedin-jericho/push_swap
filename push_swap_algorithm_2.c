@@ -108,12 +108,12 @@ t_node *search_node(t_node *head, t_node *target)
 	{
 		if (tmp->target < target->target)
 		{
-			if (!best_smaller || tmp->target > best_smaller->target)
+			if (!best_smaller || (tmp->target > best_smaller->target))
 				best_smaller = tmp;
 		}
 		else if (tmp->target > target->target)
 		{
-			if (!smallest_bigger || tmp->target < smallest_bigger->target)
+			if (!smallest_bigger || tmp->target > smallest_bigger->target)
 				smallest_bigger = tmp;
 		}
 		tmp = tmp->next;
@@ -188,20 +188,23 @@ void	cost_a(t_node **stack_a, t_node **stack_b)
 			tmp->cost_a = ((tmp->objective->position) - size_stack);
 			//if (tmp->cost_a == -1)
 			//if (tmp->cost_a == -1 && tmp->objective->target > tmp->target)
-			
+			//Este caso es para cuando el objetivo se encuentra en el ultimo lugar del stack_a y es menor al nodo que estas mirando.
 			if (tmp->cost_a == -1 && tmp->objective->target < tmp->target)
 				tmp->cost_a = 0;
-			else if (tmp->objective->target < tmp->target)
-				tmp->cost_a += 1;
-			else if (tmp->objective->target > tmp->target && \
-					(tmp->objective->position + (-1 * tmp->cost_a)) >= size_stack)
+			//else if (tmp->objective->target > tmp->target)
+			//	tmp->cost_a += 1;
+			//Este caso es cuando el objetivo se va a mover y  es menor al target de ahora.
+			else if ((tmp->objective->position - size_stack) == -1 && tmp->objective->target > tmp->target)
+				tmp->cost_a = 0;
+			else if (tmp->objective->target < tmp->target && \
+				(tmp->objective->position + (-1 * tmp->cost_a)) >= size_stack)
 				tmp->cost_a += 1;
 			//else if (((tmp->objective->position + -(tmp->cost_a)) - size_stack) == 0 && \
 			//	tmp->target < tmp->objective->target)
 			//	tmp->cost_a += 1;
-			else if (((tmp->objective->position + 1) -  size_stack == -1) && \
-				tmp->objective->target < tmp->target) 
-				tmp->cost_a += 1;
+			//else if (((tmp->objective->position + 1) - size_stack == -1) && \
+			//	tmp->objective->target < tmp->target) 
+			//	tmp->cost_a += 1;
 			//else if	(tmp->cost_a < -1)
 			//	tmp->cost_a += 1;
 			//else if ((tmp->objective->position + 1) -  size_stack == -1) 

@@ -95,10 +95,10 @@ void sort_algorithm(t_node **stack_a, t_node **stack_b)
 		pb(stack_a, stack_b);
 		i = ft_size_stack(*stack_a);
 	}
-	printf("\n&&&&&&& STACK_A INIT &&&&&&\n");
-	print_list(*stack_a);
-	printf("\n&&&&&&& STACK_B INIT &&&&&&\n");
-	print_list(*stack_b);
+	//printf("\n&&&&&&& STACK_A INIT &&&&&&\n");
+	//print_list(*stack_a);
+	//printf("\n&&&&&&& STACK_B INIT &&&&&&\n");
+	//print_list(*stack_b);
 	printf("\n&&&&&&& CASE_3 &&&&&&\n");
   case_3(stack_a);
   i = ft_size_stack(*stack_b);
@@ -107,10 +107,10 @@ void sort_algorithm(t_node **stack_a, t_node **stack_b)
     calculate_position(stack_a);
     calculate_position(stack_b);
 	fill_node(stack_a, stack_b);
-	printf("\n&&&&&&& STACK_A &&&&&&\n");
-	print_list(*stack_a);
-	printf("\n&&&&&&& STACK_B &&&&&&\n");
-	print_list(*stack_b);
+	//printf("\n&&&&&&& STACK_A &&&&&&\n");
+	//print_list(*stack_a);
+	//printf("\n&&&&&&& STACK_B &&&&&&\n");
+	//print_list(*stack_b);
     next_optimal_move(stack_a, stack_b);
 	printf("\n&&&&&&& STACK_A FINISH &&&&&&\n");
 	print_list(*stack_a);
