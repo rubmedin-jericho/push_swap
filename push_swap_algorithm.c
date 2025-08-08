@@ -74,10 +74,10 @@ static void	next_optimal_move(t_node **stack_a, t_node **stack_b)
 	target = get_optimal_t_node(stack_b, a_void, b_void);
 	if (target->position != 0)
 		prepare_stacks(target, stack_a, stack_b);
-	printf("\nSTACK_A\n");
-	print_list(*stack_a);
-	printf("\nSTACK_A\n");
-	print_list(*stack_b);
+//	printf("\nSTACK_A\n");
+//	print_list(*stack_a);
+//	printf("\nSTACK_A\n");
+//	print_list(*stack_b);
 	make_instruction(target, stack_a, stack_b);
 	pa(stack_a, stack_b);
 	calculate_position(stack_a);
@@ -89,17 +89,17 @@ void sort_algorithm(t_node **stack_a, t_node **stack_b)
   int i;
 
   i = 0; 
-	printf("\n&&&&&&& PUSH_B &&&&&&\n");
+//	printf("\n&&&&&&& PUSH_B &&&&&&\n");
 	while(i != 3)
 	{
 		pb(stack_a, stack_b);
 		i = ft_size_stack(*stack_a);
 	}
-	//printf("\n&&&&&&& STACK_A INIT &&&&&&\n");
-	//print_list(*stack_a);
-	//printf("\n&&&&&&& STACK_B INIT &&&&&&\n");
-	//print_list(*stack_b);
-	printf("\n&&&&&&& CASE_3 &&&&&&\n");
+//	printf("\n&&&&&&& STACK_A INIT &&&&&&\n");
+//	print_list(*stack_a);
+//	printf("\n&&&&&&& STACK_B INIT &&&&&&\n");
+//	print_list(*stack_b);
+//	printf("\n&&&&&&& CASE_3 &&&&&&\n");
   case_3(stack_a);
   i = ft_size_stack(*stack_b);
   while(i != 0)
@@ -107,19 +107,25 @@ void sort_algorithm(t_node **stack_a, t_node **stack_b)
     calculate_position(stack_a);
     calculate_position(stack_b);
 	fill_node(stack_a, stack_b);
-	//printf("\n&&&&&&& STACK_A &&&&&&\n");
-	//print_list(*stack_a);
-	//printf("\n&&&&&&& STACK_B &&&&&&\n");
-	//print_list(*stack_b);
+//	printf("\n&&&&&&& STACK_A &&&&&&\n");
+//	print_list(*stack_a);
+//	printf("\n&&&&&&& STACK_B &&&&&&\n");
+//	print_list(*stack_b);
     next_optimal_move(stack_a, stack_b);
-	printf("\n&&&&&&& STACK_A FINISH &&&&&&\n");
-	print_list(*stack_a);
-	printf("\n&&&&&&& STACK_B FINISH &&&&&&\n");
-	print_list(*stack_b);
+//	printf("\n&&&&&&& STACK_A FINISH &&&&&&\n");
+//	print_list(*stack_a);
+//	printf("\n&&&&&&& STACK_B FINISH &&&&&&\n");
+//	print_list(*stack_b);
     i--;
   }
 }
 
+int	check_last_s(t_node *tmp, int size_stack)
+{
+   	if((tmp->objective->position + (-1 * tmp->cost_a)) >= size_stack)
+		return (1);
+	return (0);
+}
 void	find_objective(t_node **stack_a, t_node **stack_b)
 {
 	t_node *tmp_b;
@@ -128,7 +134,7 @@ void	find_objective(t_node **stack_a, t_node **stack_b)
 	while(tmp_b)
 	{
 		tmp_b->objective = find_pos(stack_a, tmp_b);
-		printf("\n---tmp_b_target: %i---\n---objective_target: %i\n", tmp_b->target, tmp_b->objective->target);
+//		printf("\n---tmp_b_target: %i---\n---objective_target: %i\n", tmp_b->target, tmp_b->objective->target);
 		tmp_b = tmp_b->next;
 	}
 }

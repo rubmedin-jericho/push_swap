@@ -199,6 +199,8 @@ void	cost_a(t_node **stack_a, t_node **stack_b)
 			else if (tmp->objective->target < tmp->target && \
 				(tmp->objective->position + (-1 * tmp->cost_a)) >= size_stack)
 				tmp->cost_a += 1;
+			else if (tmp->objective->target > tmp->target && tmp->cost_a < 0)
+				tmp->cost_a += 1;
 			//else if (((tmp->objective->position + -(tmp->cost_a)) - size_stack) == 0 && \
 			//	tmp->target < tmp->objective->target)
 			//	tmp->cost_a += 1;

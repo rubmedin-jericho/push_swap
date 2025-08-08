@@ -63,7 +63,7 @@ t_node *search_node(t_node *head, t_node *target);
 void	case_2(t_node **stack);
 void	case_3(t_node **stack);
 void	case_4(t_node **stack_a, t_node **stack_b);
-void	case_5(t_node **stack_a, t_node **stack_b);
+void	case_5(t_node **stack_a, t_node **stack_b, int argc);
 
 void	sa(t_node **stack_a);
 void	sb(t_node **stack_b);

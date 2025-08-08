@@ -63,7 +63,7 @@ int	ft_atoi(char *str)
 	}
 	if ((nbr * sign < INT_MIN) || (nbr * sign > INT_MAX))
 	{
-		write(1, "Error, limits int\n", 18);
+		write(2, "Error\n", 6);
 		return (1);
 	}
 	return ((int)(nbr * sign));
@@ -88,6 +88,8 @@ int	is_not_n(char *str)
 	flag = 0;
 	while (str[i])
 	{
+		if(str[i] > 48 && str[i] < 57)
+			flag = 1;
 		if ((str[i] == '-' && flag == 0) || (str[i] == '+' && flag == 0))
 		{
 			flag = 1;
