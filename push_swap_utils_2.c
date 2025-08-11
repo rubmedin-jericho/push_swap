@@ -75,7 +75,7 @@ void	reposition_stack(t_node **stack_a)
 }
 
 //void	prepare_stack_normal(t_node *target, t_node **stack_a, t_node **stack_b)
-void	prepare_stack_normal(t_node *target, t_node **stack_b)
+void	prepare_stack_normal(t_node *target, t_node **stack_a, t_node **stack_b)
 {
 	while (target->position != 0)
 	{
@@ -85,13 +85,13 @@ void	prepare_stack_normal(t_node *target, t_node **stack_b)
 		//	target->cost_a -= 1;
 		//	target->cost_b -= 1;
 		//}
-		rb(stack_b);
+		positive_mov(target, stack_a, stack_b);
 		target->cost_b -= 1;
 		calculate_position(stack_b);
 	}
 }
 
-void	prepare_stack_reverse(t_node *target, t_node **stack_b)
+void	prepare_stack_reverse(t_node *target, t_node **stack_a, t_node **stack_b)
 {
 	while (target->position != 0)
 	{
@@ -101,7 +101,7 @@ void	prepare_stack_reverse(t_node *target, t_node **stack_b)
 		//	target->cost_a += 1;
 		//	target->cost_b += 1;
 		//}
-		rrb(stack_b);
+		negative_mov(target, stack_a, stack_b);
 		target->cost_b += 1;
 		calculate_position(stack_b);
 	}

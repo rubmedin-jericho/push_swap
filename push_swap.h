@@ -39,7 +39,7 @@ int		create_linked_list(t_node **stack, char **argv, int argc);
 void	sort_algorithm(t_node **stack_a, t_node **stack_b);
 void	index_assign(t_node **stack);
 int		ft_size_stack(t_node *stack_a);
-void	make_instruction(t_node *target, t_node **stack_a, t_node **stack_b);
+void	make_instruction(t_node *target, t_node **stack_a);
 void	calculate_position(t_node **stack);
 t_node	*find_pos(t_node **stack_a, t_node *target);
 void	prepare_stacks(t_node *target, t_node **stack_a, t_node **stack_b);
@@ -54,11 +54,14 @@ void	find_objective(t_node **stack_a, t_node **stack_b);
 void	calculate_cost_stack(t_node **stack_a, t_node **stack_b, int flag);
 void	cost_b(t_node **stack_b);
 void	cost_a(t_node **stack_a, t_node **stack_b);
-void	prepare_stack_normal(t_node *target, t_node **stack_b);
-void	prepare_stack_reverse(t_node *target, t_node **stack_b);
+void	prepare_stack_normal(t_node *target, t_node **stack_a, t_node **stack_b);
+void	prepare_stack_reverse(t_node *target, t_node **stack_a, t_node **stack_b);
 int		checker_and_reverse(int	nbr);
 t_node	*sucessor_node(t_node *tmp, t_node *target);
 t_node *search_node(t_node *head, t_node *target);
+
+void	positive_mov(t_node *target, t_node **stack_a, t_node **stack_b);
+void	negative_mov(t_node *target, t_node **stack_a, t_node **stack_b);
 
 void	case_2(t_node **stack);
 void	case_3(t_node **stack);

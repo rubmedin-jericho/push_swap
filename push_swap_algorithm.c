@@ -76,48 +76,88 @@ static void	next_optimal_move(t_node **stack_a, t_node **stack_b)
 		prepare_stacks(target, stack_a, stack_b);
 //	printf("\nSTACK_A\n");
 //	print_list(*stack_a);
-//	printf("\nSTACK_A\n");
+//	printf("\nSTACK_B\n");
 //	print_list(*stack_b);
-	make_instruction(target, stack_a, stack_b);
+	make_instruction(target, stack_a);
 	pa(stack_a, stack_b);
 	calculate_position(stack_a);
 	calculate_position(stack_b);
 }
 
+void	sort_3_reverse(t_node **stack)
+{
+	int	num_1;
+	int	num_2;
+	int	num_3;
+
+	num_1 = (*stack)->num;
+	num_2 = (*stack)->next->num;
+	num_3 = (*stack)->next->next->num;
+	if ((num_1 < num_2) && (num_2 < num_3))
+	{
+		ra(stack);
+		sa(stack);
+	}
+	if ((num_1 > num_2) && (num_1 < num_3))
+		rra(stack);
+	else if ((num_1 > num_2) && (num_2 < num_3) && (num_1 > num_3))
+	{
+		ra(stack);
+		sa(stack);
+		rra(stack);
+	}
+	else if ((num_1 < num_2) && (num_2 > num_3) && (num_1 < num_3))
+		ra(stack);
+	else if ((num_1 < num_2) && (num_2 > num_3) && (num_1 > num_3))
+		sa(stack);
+}
+
+void	pre_sort(t_node **stack_a, t_node **stack_b, int size_stack)
+{
+	t_node *tmp_b;
+	t_node *tmp_a;
+	t_node *mid_stack;
+
+	calculate_position(stack_b);
+	if(ft_size_stack(*stack_b) == 3)
+		sort_3_reverse(stack_b);
+	mid_stack = (*stack_b);
+	tmp_b = (*stack_b);
+	tmp_a = (*stack_a);
+	if (tmp_a->target + 1 <= size_stack && tmp_a->target > tmp_b->target) 
+		rb(stack_b);
+	else if (tmp_a->target + 1 >= size_stack)
+		rrb(stack_b);
+}
+
 void sort_algorithm(t_node **stack_a, t_node **stack_b)
 {
-  int i;
+	int	i;
+	int	size_stack;
 
-  i = 0; 
-//	printf("\n&&&&&&& PUSH_B &&&&&&\n");
+	i = 0; 
+	size_stack = (ft_size_stack(*stack_a) / 2);
 	while(i != 3)
 	{
+		if(ft_size_stack(*stack_b) > 3)
+			pre_sort(stack_a, stack_b, size_stack);
 		pb(stack_a, stack_b);
+	//	printf("\n&&&&&&& STACK_A &&&&&&\n");
+	//	print_list(*stack_a);
+	//	printf("\n&&&&&&& STACK_B &&&&&&\n");
+	//	print_list(*stack_b);
 		i = ft_size_stack(*stack_a);
 	}
-//	printf("\n&&&&&&& STACK_A INIT &&&&&&\n");
-//	print_list(*stack_a);
-//	printf("\n&&&&&&& STACK_B INIT &&&&&&\n");
-//	print_list(*stack_b);
-//	printf("\n&&&&&&& CASE_3 &&&&&&\n");
-  case_3(stack_a);
-  i = ft_size_stack(*stack_b);
-  while(i != 0)
-  {
-    calculate_position(stack_a);
-    calculate_position(stack_b);
-	fill_node(stack_a, stack_b);
-//	printf("\n&&&&&&& STACK_A &&&&&&\n");
-//	print_list(*stack_a);
-//	printf("\n&&&&&&& STACK_B &&&&&&\n");
-//	print_list(*stack_b);
-    next_optimal_move(stack_a, stack_b);
-//	printf("\n&&&&&&& STACK_A FINISH &&&&&&\n");
-//	print_list(*stack_a);
-//	printf("\n&&&&&&& STACK_B FINISH &&&&&&\n");
-//	print_list(*stack_b);
-    i--;
-  }
+	case_3(stack_a);
+	i = ft_size_stack(*stack_b);
+	while(i != 0)
+	{
+		calculate_position(stack_a);
+		calculate_position(stack_b);
+		fill_node(stack_a, stack_b);
+		next_optimal_move(stack_a, stack_b);
+	i--;
+	}
 }
 
 int	check_last_s(t_node *tmp, int size_stack)

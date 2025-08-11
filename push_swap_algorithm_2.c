@@ -221,16 +221,37 @@ void	prepare_stacks(t_node *target, t_node **stack_a, t_node **stack_b)
 {
 	(void)stack_a;
 	if (target->cost_b > 0)
-		prepare_stack_normal(target, stack_b);
+		prepare_stack_normal(target, stack_a, stack_b);
 	else if (target->cost_b < 0)
-		prepare_stack_reverse(target, stack_b);
+		prepare_stack_reverse(target, stack_a, stack_b);
 }
 
-void	make_instruction(t_node *target, t_node **stack_a, t_node **stack_b)
+void	positive_mov(t_node *target, t_node **stack_a, t_node **stack_b)
+{
+	if(target->cost_a > 0 && target->cost_b > 0)
+	{
+		rr(stack_a, stack_b);
+		target->cost_a -= 1;
+	}
+	else if (target->cost_a <= 0 && target->cost_b > 0)
+		rb(stack_b);
+}
+
+void	negative_mov(t_node *target, t_node **stack_a, t_node **stack_b)
+{
+	if (target->cost_a < 0 && target->cost_b < 0)
+	{
+		rrr(stack_a, stack_b);
+		target->cost_a += 1;
+	}
+	else if (target->cost_a >= 0 && target->cost_b < 0)
+		rrb(stack_b);
+}
+
+void	make_instruction(t_node *target, t_node **stack_a)
 {
 	int	i;
 
-	(void)stack_b;
 	i = 0;
 	if (target->cost_a > 0)
 	{
@@ -238,9 +259,7 @@ void	make_instruction(t_node *target, t_node **stack_a, t_node **stack_b)
 		{
 			ra(stack_a);
 			calculate_position(stack_a);
-			//calculate_cost_stack(stack_a, stack_b, 0);
 		}
-
 	}
 	else if (target->cost_a < 0)
 	{
@@ -249,7 +268,6 @@ void	make_instruction(t_node *target, t_node **stack_a, t_node **stack_b)
 		{
 			rra(stack_a);
 			calculate_position(stack_a);
-			//calculate_cost_stack(stack_a, stack_b, 0);
 		}
 	}
 }

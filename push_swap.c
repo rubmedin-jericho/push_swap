@@ -72,11 +72,14 @@ static int	push_swap(char **argv, int argc)
 		case_2(&stack_a);
 	else if (argc == 4)
 		case_3(&stack_a);
-	//else if (argc == 5)
-	//	case_4(&stack_a, &stack_b);
 	else if (argc == 5 || argc == 6)
 		case_5(&stack_a, &stack_b, argc);
 	reposition_stack(&stack_a);
+//	printf("\n&&&&&&& STACK_A FINISH &&&&&&\n");
+//	print_list(stack_a);
+//	printf("\n&&&&&&& STACK_B FINISH &&&&&&\n");
+//	print_list(stack_b);
+	//recuento_del_stack(stack_a);
 	free_list(stack_a);
 	return (0);
 }
