@@ -68,7 +68,9 @@ void	reposition_stack(t_node **stack_a)
 	size_stack = ft_size_stack(*stack_a);
 	if((*stack_a)->target <= (size_stack / 2))
 		while((*stack_a)->target != 0)
+		{
 			ra(stack_a);
+		}
 	else if((*stack_a)->target > (size_stack / 2))
 		while((*stack_a)->target != 0)
 			rra(stack_a);

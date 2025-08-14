@@ -74,11 +74,11 @@ static void	next_optimal_move(t_node **stack_a, t_node **stack_b)
 	target = get_optimal_t_node(stack_b, a_void, b_void);
 	if (target->position != 0)
 		prepare_stacks(target, stack_a, stack_b);
+	make_instruction(target, stack_a);
 //	printf("\nSTACK_A\n");
 //	print_list(*stack_a);
 //	printf("\nSTACK_B\n");
 //	print_list(*stack_b);
-	make_instruction(target, stack_a);
 	pa(stack_a, stack_b);
 	calculate_position(stack_a);
 	calculate_position(stack_b);
@@ -112,22 +112,43 @@ void	sort_3_reverse(t_node **stack)
 		sa(stack);
 }
 
+//void	pre_sort(t_node **stack_a, t_node **stack_b, int size_stack)
+//{
+//	t_node *tmp_b;
+//	t_node *tmp_a;
+//	t_node *mid_stack;
+//
+//	calculate_position(stack_b);
+//	if(ft_size_stack(*stack_b) == 3)
+//		sort_3_reverse(stack_b);
+//	mid_stack = (*stack_b);
+//	tmp_b = (*stack_b);
+//	tmp_a = (*stack_a);
+//	if (tmp_a->target + 1 <= size_stack && tmp_a->target > tmp_b->target) 
+//		rb(stack_b);
+//	else if (tmp_a->target + 1 >= size_stack)
+//		rrb(stack_b);
+//}
 void	pre_sort(t_node **stack_a, t_node **stack_b, int size_stack)
 {
-	t_node *tmp_b;
-	t_node *tmp_a;
-	t_node *mid_stack;
-
-	calculate_position(stack_b);
-	if(ft_size_stack(*stack_b) == 3)
-		sort_3_reverse(stack_b);
-	mid_stack = (*stack_b);
-	tmp_b = (*stack_b);
-	tmp_a = (*stack_a);
-	if (tmp_a->target + 1 <= size_stack && tmp_a->target > tmp_b->target) 
-		rb(stack_b);
-	else if (tmp_a->target + 1 >= size_stack)
-		rrb(stack_b);
+	int	count;
+	
+	 count = 0;
+	while(count < size_stack && (*stack_a))
+	{
+		if((*stack_a)->target <= ((size_stack / 2) - 1))
+			pb(stack_a, stack_b);
+		else if ((*stack_a)->target > ((size_stack / 2) - 1))
+			ra(stack_a);
+		count++;
+	}
+	count = 0;
+	size_stack = ft_size_stack(*stack_a);
+	while(count < size_stack && (*stack_a) && ft_size_stack(*stack_a) > 3 )
+	{
+		pb(stack_a, stack_b);
+		count++;
+	}
 }
 
 void sort_algorithm(t_node **stack_a, t_node **stack_b)
@@ -136,19 +157,21 @@ void sort_algorithm(t_node **stack_a, t_node **stack_b)
 	int	size_stack;
 
 	i = 0; 
-	size_stack = (ft_size_stack(*stack_a) / 2);
+	size_stack = ft_size_stack(*stack_a);
 	while(i != 3)
 	{
-		if(ft_size_stack(*stack_b) > 3)
-			pre_sort(stack_a, stack_b, size_stack);
-		pb(stack_a, stack_b);
-	//	printf("\n&&&&&&& STACK_A &&&&&&\n");
-	//	print_list(*stack_a);
-	//	printf("\n&&&&&&& STACK_B &&&&&&\n");
-	//	print_list(*stack_b);
+		pre_sort(stack_a, stack_b, size_stack);
+//		printf("\n&&&&&&& STACK_A &&&&&&\n");
+//		print_list(*stack_a);
+//		printf("\n&&&&&&& STACK_B &&&&&&\n");
+//		print_list(*stack_b);
 		i = ft_size_stack(*stack_a);
 	}
 	case_3(stack_a);
+//	printf("\n&&&&& STACK_A &&&&&\n");
+//	print_list(*stack_a);
+//	printf("\n&&&&& STACK_B &&&&&\n");
+//	print_list(*stack_b);
 	i = ft_size_stack(*stack_b);
 	while(i != 0)
 	{
@@ -159,6 +182,24 @@ void sort_algorithm(t_node **stack_a, t_node **stack_b)
 	i--;
 	}
 }
+//void	sort_algorithm(t_node **stack_a, t_node **stack_b)
+//{
+//	int	i;
+//	t_node *tmp_a;
+//	int	size_stack;
+//
+//	i = 0;
+//	tmp_a = (*stack_a);
+//	size_stack = ft_size_stack(*stack_a);
+//	while(i < size_stack)
+//	{
+//		if(tmp_a->target <= (size_stack / 2))
+//			pb(stack_a, stack_b);
+//		else
+//			ra(stack_a);
+//		i++;
+//	}
+//}
 
 int	check_last_s(t_node *tmp, int size_stack)
 {
