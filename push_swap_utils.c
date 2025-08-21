@@ -42,7 +42,7 @@ void	index_assign(t_node **stack)
 	}
 }
 
-int	ft_atoi(char *str)
+/*int	ft_atoi(const char *str)
 {
 	int		sign;
 	int		i;
@@ -62,12 +62,9 @@ int	ft_atoi(char *str)
 		i++;
 	}
 	if ((nbr * sign < INT_MIN) || (nbr * sign > INT_MAX))
-	{
-		write(2, "Error\n", 6);
-		return (1);
-	}
+		return (INT_MIN);
 	return ((int)(nbr * sign));
-}
+}*/
 
 int	ft_strlen(char *str)
 {

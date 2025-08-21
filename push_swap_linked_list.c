@@ -15,7 +15,7 @@ void	print_list(t_node *stack)
 {
 	while (stack != NULL)
 	{
-		printf("t_node_num: %d  ---- t_node_pos: %i ----  t_node_index: %i  ----  t_node_cost_b: %i ----  t_node_cost_a: %i\n", stack->num, stack->position , stack->target, stack->cost_b, stack->cost_a);
+		printf("t_node_num: %d  ---- t_node_pos: %i ----  t_node_index: %i  ----  t_node_cost_b: %i ----  t_node_cost_a: %i ---- t_node_share: %i\n", stack->num, stack->position , stack->target, stack->cost_b, stack->cost_a, stack->shared_cost);
 		stack = stack->next;
 	}
 }
@@ -64,8 +64,10 @@ int	create_linked_list(t_node **stack, char **argv, int argc)
 	while (i < argc)
 	{
 		num_atoi = ft_atoi(argv[i]);
+		if (num_atoi == INT_MIN)
+			return (INT_MIN);
 		t_node_tmp = create_t_node(num_atoi);
-		if (!t_node_tmp)
+		if (t_node_tmp == NULL)
 			return (1);
 		if (*stack == NULL)
 			*stack = t_node_tmp;

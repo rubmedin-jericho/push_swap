@@ -1,0 +1,7 @@
+a.out
+checker_linux
+push_swap
+*.o
+traces.txt
+push_swap_test_linux.sh
+

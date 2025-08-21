@@ -69,11 +69,11 @@ void	reposition_stack(t_node **stack_a)
 	if((*stack_a)->target <= (size_stack / 2))
 		while((*stack_a)->target != 0)
 		{
-			ra(stack_a);
+			rra(stack_a);
 		}
 	else if((*stack_a)->target > (size_stack / 2))
 		while((*stack_a)->target != 0)
-			rra(stack_a);
+			ra(stack_a);
 }
 
 //void	prepare_stack_normal(t_node *target, t_node **stack_a, t_node **stack_b)
@@ -88,7 +88,6 @@ void	prepare_stack_normal(t_node *target, t_node **stack_a, t_node **stack_b)
 		//	target->cost_b -= 1;
 		//}
 		positive_mov(target, stack_a, stack_b);
-		target->cost_b -= 1;
 		calculate_position(stack_b);
 	}
 }
@@ -104,7 +103,6 @@ void	prepare_stack_reverse(t_node *target, t_node **stack_a, t_node **stack_b)
 		//	target->cost_b += 1;
 		//}
 		negative_mov(target, stack_a, stack_b);
-		target->cost_b += 1;
 		calculate_position(stack_b);
 	}
 }

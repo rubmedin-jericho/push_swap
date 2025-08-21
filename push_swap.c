@@ -12,24 +12,37 @@
 
 #include "push_swap.h"
 
-int	recuento_del_stack(t_node *stack_a)
-{
-	t_node	*tmp;
-	int		i;
-	int		size_stack;
+//int	recuento_del_stack(t_node *stack_a)
+//{
+//	t_node	*tmp;
+//	int		i;
+//	int		size_stack;
+//
+//	i = 0;
+//	size_stack = ft_size_stack(stack_a) - 1;
+//	tmp = stack_a;
+//	while(tmp->next)
+//	{
+//		if (i == tmp->target)
+//			i++;
+//		tmp = tmp->next;
+//	}
+//	if(i != size_stack)
+//		return (1);
+//	return (0);
+//}
 
-	i = 0;
-	size_stack = ft_size_stack(stack_a);
-	tmp = stack_a;
-	while(tmp)
+int recuento_del_stack(t_node *stack)
+{
+	t_node *tmp = stack;
+
+	while (tmp && tmp->next)
 	{
-		if (i == tmp->target)
-			i++;
+		if (tmp->target > tmp->next->target)
+			return 1;
 		tmp = tmp->next;
 	}
-	if(i == ft_size_stack(stack_a))
-		return (1);
-	return (0);
+	return 0;
 }
 
 static int	verify_num(t_node *stack_a)
@@ -44,10 +57,7 @@ static int	verify_num(t_node *stack_a)
 		while (t_node_tmp)
 		{
 			if (t_node_tmp->num == t_node_count->num)
-			{
-				write(2, "Error\n", 6);
 				return (1);
-			}
 			t_node_tmp = t_node_tmp->next;
 		}
 		t_node_count = t_node_count->next;
@@ -64,8 +74,10 @@ static int	push_swap(char **argv, int argc)
 	stack_b = NULL;
 	if (create_linked_list(&stack_a, argv, argc))
 		return (1);
-	if (verify_num(stack_a) || recuento_del_stack(stack_a))
+	if (verify_num(stack_a))
 		return (1);
+	if(!recuento_del_stack(stack_a))
+		return (0);
 	if (argc > 6)
 		sort_algorithm(&stack_a, &stack_b);
 	else if (argc == 3)
@@ -75,12 +87,8 @@ static int	push_swap(char **argv, int argc)
 	else if (argc == 5 || argc == 6)
 		case_5(&stack_a, &stack_b, argc);
 	reposition_stack(&stack_a);
-//	printf("\n&&&&&&& STACK_A FINISH &&&&&&\n");
-//	print_list(stack_a);
-//	printf("\n&&&&&&& STACK_B FINISH &&&&&&\n");
-//	print_list(stack_b);
-	//recuento_del_stack(stack_a);
 	free_list(stack_a);
+	free_list(stack_b);
 	return (0);
 }
 
@@ -107,12 +115,15 @@ int	main(int argc, char **argv)
 		write(2, "Error\n", 6);
 		return (2);
 	}
-	if (verify_arg(argv, argc))
+	if (verify_arg(argv, argc) || ft_isdupli(argc, argv))
 	{
 		write(2, "Error\n", 6);
 		return (2);
 	}
 	if (push_swap(argv, argc))
-		return (1);
+	{
+		write(2,"Error\n", 6);
+		return (2);
+	}
 	return (0);
 }

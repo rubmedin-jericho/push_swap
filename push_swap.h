@@ -25,12 +25,14 @@ typedef struct stack
 	int				target;
 	int				cost_a;
 	int				cost_b;
+	int				shared_cost;
 	struct stack	*objective;
 	struct stack	*next;
 }	t_node;
 
+int	ft_atoi(const char *str);
 int		is_not_n(char *str);
-int		ft_atoi(char *str);
+int	ft_isdupli(int argc, char **argv);
 int		ft_strlen(char *str);
 void	free_list(t_node *stack);
 void	add_t_node_to_list(t_node **stack, t_node *t_node);
@@ -59,6 +61,7 @@ void	prepare_stack_reverse(t_node *target, t_node **stack_a, t_node **stack_b);
 int		checker_and_reverse(int	nbr);
 t_node	*sucessor_node(t_node *tmp, t_node *target);
 t_node *search_node(t_node *head, t_node *target);
+int	ft_strncmp(const char *s1, const char *s2, size_t n);
 
 void	positive_mov(t_node *target, t_node **stack_a, t_node **stack_b);
 void	negative_mov(t_node *target, t_node **stack_a, t_node **stack_b);

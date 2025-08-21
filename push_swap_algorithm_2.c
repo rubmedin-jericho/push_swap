@@ -228,24 +228,46 @@ void	prepare_stacks(t_node *target, t_node **stack_a, t_node **stack_b)
 
 void	positive_mov(t_node *target, t_node **stack_a, t_node **stack_b)
 {
-	if(target->cost_a > 0 && target->cost_b > 0)
+//	if(target->cost_a > 0 && target->cost_b > 0)
+//	while(target->cost_a > 0 && target->cost_b > 0)
+	if (target->shared_cost != 0)
 	{
 		rr(stack_a, stack_b);
 		target->cost_a -= 1;
+		target->cost_b -= 1;
+		target->shared_cost -= 1;
 	}
-	else if (target->cost_a <= 0 && target->cost_b > 0)
+	else if (target->cost_a > 0)
+	{
+		ra(stack_a);
+		target->cost_a -= 1;
+	}
+	else if (target->cost_b > 0)
+	{
 		rb(stack_b);
+		target->cost_b -= 1;
+	}
 }
 
 void	negative_mov(t_node *target, t_node **stack_a, t_node **stack_b)
 {
-	if (target->cost_a < 0 && target->cost_b < 0)
+	if (target->shared_cost != 0)
 	{
 		rrr(stack_a, stack_b);
 		target->cost_a += 1;
+		target->cost_b += 1;
+		target->shared_cost += 1;
 	}
-	else if (target->cost_a >= 0 && target->cost_b < 0)
+	else if (target->cost_a < 0)
+	{
+		rra(stack_a);
+		target->cost_a += 1;
+	}
+	else if (target->cost_b < 0)
+	{
 		rrb(stack_b);
+		target->cost_b += 1;
+	}
 }
 
 void	make_instruction(t_node *target, t_node **stack_a)

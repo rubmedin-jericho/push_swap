@@ -41,27 +41,87 @@ void	calculate_position(t_node **stack)
 	}
 }
 
+int	rr_calculate(int tmp_cost_a, int tmp_cost_b)
+{
+	int	count;
+
+	count = 0;
+	while(tmp_cost_a > 0 && tmp_cost_b > 0)
+	{
+		count++;
+		tmp_cost_a--;
+		tmp_cost_b--;
+	}
+	return (count);
+}
+
+int	rrr_calculate(int tmp_cost_a, int tmp_cost_b)
+{
+	int	count;
+
+	count = 0;
+	while(tmp_cost_a < 0 && tmp_cost_b < 0)
+	{
+		count--;
+		tmp_cost_a++;
+		tmp_cost_b++;
+	}
+	return (count);
+}
+
+void	calculate_cost_rr_rrr(t_node **stack_b)
+{
+	t_node *tmp_b;
+	int	tmp_cost_a;
+	int	tmp_cost_b;
+	int	count;
+
+	tmp_b = (*stack_b);
+	while(tmp_b)
+	{
+		count = 0;
+		tmp_cost_a = tmp_b->cost_a;
+		tmp_cost_b = tmp_b->cost_b;
+		if(tmp_cost_a > 0 && tmp_cost_b > 0)
+			count = rr_calculate(tmp_cost_a, tmp_cost_b);
+		else if(tmp_cost_a < 0 && tmp_cost_b < 0)
+			count = rrr_calculate(tmp_cost_a, tmp_cost_b);
+		tmp_b->shared_cost = count;
+		tmp_b = tmp_b->next;
+	}
+}
+
 static t_node	*get_optimal_t_node(t_node **stack_b, int tmp_cost_a, int tmp_cost_b)
 {
-	t_node	*t_node_b;
 	t_node	*tmp;
-	int		t_node_b_cost_a;
-	int		t_node_b_cost_b;
+	t_node	*t_node_b;
+	//int		cost_a;
+	//int		cost_b;
+	//int		shared;
+	int		tmp_shared;
+	int		(*abs)(int);
 
-	t_node_b = (*stack_b);
+	abs = checker_and_reverse;
 	tmp = (*stack_b);
-	t_node_b_cost_a = checker_and_reverse(t_node_b->cost_a);
-	t_node_b_cost_b = checker_and_reverse(t_node_b->cost_b);
+	t_node_b = (*stack_b);
+	calculate_cost_rr_rrr(stack_b);
+	//cost_a = checker_and_reverse((*stack_b)->cost_a);
+	//cost_b = checker_and_reverse((*stack_b)->cost_b);
+	//shared = checker_and_reverse((*stack_b)->shared_cost);
 	while (tmp)
 	{
 		tmp_cost_a = checker_and_reverse(tmp->cost_a);
 		tmp_cost_b = checker_and_reverse(tmp->cost_b);
-		if ((tmp_cost_b + tmp_cost_a) < (t_node_b_cost_b + t_node_b_cost_a))
+		tmp_shared = checker_and_reverse(tmp->shared_cost);
+		//if (((tmp_cost_b + tmp_cost_a) - shared) < ((cost_b + cost_a) - shared))
+		if (tmp_cost_b + tmp_cost_a - tmp_shared < \
+			abs(t_node_b->cost_b) + abs(t_node_b->cost_a) - abs(t_node_b->shared_cost))
 			t_node_b = tmp;
 		tmp = tmp->next;
 	}
 	return (t_node_b);
 }
+
 
 static void	next_optimal_move(t_node **stack_a, t_node **stack_b)
 {
@@ -75,10 +135,6 @@ static void	next_optimal_move(t_node **stack_a, t_node **stack_b)
 	if (target->position != 0)
 		prepare_stacks(target, stack_a, stack_b);
 	make_instruction(target, stack_a);
-//	printf("\nSTACK_A\n");
-//	print_list(*stack_a);
-//	printf("\nSTACK_B\n");
-//	print_list(*stack_b);
 	pa(stack_a, stack_b);
 	calculate_position(stack_a);
 	calculate_position(stack_b);
@@ -178,7 +234,15 @@ void sort_algorithm(t_node **stack_a, t_node **stack_b)
 		calculate_position(stack_a);
 		calculate_position(stack_b);
 		fill_node(stack_a, stack_b);
+//		printf("\n&&&&& STACK_A &&&&&\n");
+//		print_list(*stack_a);
+//		printf("\n&&&&& STACK_B &&&&&\n");
+//		print_list(*stack_b);
 		next_optimal_move(stack_a, stack_b);
+//		printf("\n&&&&& STACK_A &&&&&\n");
+//		print_list(*stack_a);
+//		printf("\n&&&&& STACK_B &&&&&\n");
+//		print_list(*stack_b);
 	i--;
 	}
 }
