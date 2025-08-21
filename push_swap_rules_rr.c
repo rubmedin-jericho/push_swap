@@ -46,7 +46,7 @@ void	rrb(t_node **stack)
 	write(1, "rrb\n", 4);
 }
 
-void	rra_modify(t_node **stack)
+static void	rra_modify(t_node **stack)
 {
 	t_node	*t_node_tmp;
 	t_node	*cursor;
@@ -62,7 +62,7 @@ void	rra_modify(t_node **stack)
 	*stack = cursor;
 }
 
-void	rrb_modify(t_node **stack)
+static void	rrb_modify(t_node **stack)
 {
 	t_node	*t_node_tmp;
 	t_node	*cursor;

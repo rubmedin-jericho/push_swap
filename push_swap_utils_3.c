@@ -53,7 +53,7 @@ int	ft_isdupli(int argc, char **argv)
 	{
 		count2 = count + 1;
 		num1 = ft_atoi(argv[count]);
-		if(num1 == INT_MIN)
+		if (num1 == INT_MIN)
 			return (1);
 		while (count2 < argc)
 		{

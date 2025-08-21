@@ -4,4 +4,6 @@ push_swap
 *.o
 traces.txt
 push_swap_test_linux.sh
-
+.nfs*
+0
+.gitignore

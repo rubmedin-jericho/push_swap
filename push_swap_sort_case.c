@@ -77,29 +77,6 @@ void	case_4(t_node **stack_a, t_node **stack_b)
 	pa(stack_a, stack_b);
 }
 
-void	init_case_5(t_node **stack_a, t_node **stack_b)
-{
-	pb(stack_a, stack_b);
-	pb(stack_a, stack_b);
-	case_3(stack_a);
-}
-
-void	move_stack(t_node **stack_a, t_node **stack_b, t_node *tmp_node)
-{
-	int	size_stack;
-
-	size_stack = ft_size_stack(*stack_a);
-	while(tmp_node->position == 0)
-	{
-		calculate_position(stack_a);
-		if (tmp_node->position <= (size_stack / 2))
-			ra(stack_a);
-		else
-			rra(stack_a);
-	}
-	pa(stack_a, stack_b);
-}
-
 void	case_5(t_node **stack_a, t_node **stack_b, int argc)
 {
 	int	count;
@@ -125,52 +102,3 @@ void	case_5(t_node **stack_a, t_node **stack_b, int argc)
 	while ((*stack_b) != NULL)
 		pa (&(*stack_a), &(*stack_b));
 }
-//void	case_5(t_node **stack_a, t_node **stack_b)
-//{
-//	t_node *tmp_b;
-//	t_node *tmp_a;
-//	t_node *node_tmp;
-//
-//	node_tmp = (*stack_a);
-//	printf("\nSTACK_A\n");
-//	print_list(*stack_a);
-//	printf("\nSTACK_B\n");
-//	print_list(*stack_b);
-//	init_case_5(stack_a, stack_b);
-//	tmp_a = (*stack_a);
-//	tmp_b = (*stack_b);
-//	printf("\nSTACK_A\n");
-//	print_list(*stack_a);
-//	printf("\nSTACK_B\n");
-//	print_list(*stack_b);
-//	while(tmp_b)
-//	{
-//		tmp_a = (*stack_a);
-//		while(tmp_a)
-//		{
-//			calculate_position(stack_a);
-//			if(tmp_a->target < tmp_b->target)
-//				node_tmp = tmp_a;		
-//			tmp_a = tmp_a->next;
-//		}
-//		move_stack(stack_a, stack_b, node_tmp);
-//		tmp_b = tmp_b->next;
-//	}
-//	printf("\nSTACK_A\n");
-//	print_list(*stack_a);
-//	printf("\nSTACK_B\n");
-//	print_list(*stack_b);
-//}
-
-//void	case_5(t_node **stack_a, t_node **stack_b)
-//{
-//	case_4_5(stack_a, 1);
-//	pb(stack_a, stack_b);
-//	case_4_5(stack_a, 0);
-//	pb(stack_a, stack_b);
-//	case_3(stack_a);
-//	if ((*stack_b)->target < (*stack_b)->next->target)
-//		sb(stack_b);
-//	pa(stack_a, stack_b);
-//	pa(stack_a, stack_b);
-//}

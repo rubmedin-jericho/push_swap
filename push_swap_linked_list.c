@@ -11,14 +11,6 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-void	print_list(t_node *stack)
-{
-	while (stack != NULL)
-	{
-		printf("t_node_num: %d  ---- t_node_pos: %i ----  t_node_index: %i  ----  t_node_cost_b: %i ----  t_node_cost_a: %i ---- t_node_share: %i\n", stack->num, stack->position , stack->target, stack->cost_b, stack->cost_a, stack->shared_cost);
-		stack = stack->next;
-	}
-}
 
 void	free_list(t_node *stack)
 {

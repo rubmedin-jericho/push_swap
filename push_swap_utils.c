@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-static int	index_increment(t_node *t_node_tmp, t_node *stack)
+int	index_increment(t_node *t_node_tmp, t_node *stack)
 {
 	int		index_num;
 	t_node	*tmp;
@@ -42,30 +42,6 @@ void	index_assign(t_node **stack)
 	}
 }
 
-/*int	ft_atoi(const char *str)
-{
-	int		sign;
-	int		i;
-	long	nbr;
-
-	sign = 1;
-	i = 0;
-	nbr = 0;
-	if (str[i] == '-')
-	{
-		sign = -1;
-		i++;
-	}
-	while (str[i])
-	{
-		nbr = (nbr * 10) + (str[i] - '0');
-		i++;
-	}
-	if ((nbr * sign < INT_MIN) || (nbr * sign > INT_MAX))
-		return (INT_MIN);
-	return ((int)(nbr * sign));
-}*/
-
 int	ft_strlen(char *str)
 {
 	int	i;
@@ -85,7 +61,7 @@ int	is_not_n(char *str)
 	flag = 0;
 	while (str[i])
 	{
-		if(str[i] > 48 && str[i] < 57)
+		if (str[i] > 48 && str[i] < 57)
 			flag = 1;
 		if ((str[i] == '-' && flag == 0) || (str[i] == '+' && flag == 0))
 		{

@@ -16,7 +16,6 @@
 # include <limits.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <stdio.h>
 
 typedef struct stack
 {
@@ -30,9 +29,9 @@ typedef struct stack
 	struct stack	*next;
 }	t_node;
 
-int	ft_atoi(const char *str);
+int		ft_atoi(const char *str);
 int		is_not_n(char *str);
-int	ft_isdupli(int argc, char **argv);
+int		ft_isdupli(int argc, char **argv);
 int		ft_strlen(char *str);
 void	free_list(t_node *stack);
 void	add_t_node_to_list(t_node **stack, t_node *t_node);
@@ -46,22 +45,23 @@ void	calculate_position(t_node **stack);
 t_node	*find_pos(t_node **stack_a, t_node *target);
 void	prepare_stacks(t_node *target, t_node **stack_a, t_node **stack_b);
 t_node	*find_the_last_pos(t_node **stack_a);
-int		target_z_selector(int pos_in_stack_a, t_node **stack_a, t_node *target_tmp);
 void	reposition_stack(t_node **stack_a);
 void	prepare_stack_a(t_node *target, t_node **stack_a);
 void	prepare_stack_b(t_node *target, t_node **stack_a);
-void	asign_objective(t_node *stack_a, t_node *stack_b);
 void	fill_node(t_node **stack_a, t_node **stack_b);
 void	find_objective(t_node **stack_a, t_node **stack_b);
 void	calculate_cost_stack(t_node **stack_a, t_node **stack_b, int flag);
 void	cost_b(t_node **stack_b);
 void	cost_a(t_node **stack_a, t_node **stack_b);
-void	prepare_stack_normal(t_node *target, t_node **stack_a, t_node **stack_b);
-void	prepare_stack_reverse(t_node *target, t_node **stack_a, t_node **stack_b);
-int		checker_and_reverse(int	nbr);
-t_node	*sucessor_node(t_node *tmp, t_node *target);
-t_node *search_node(t_node *head, t_node *target);
-int	ft_strncmp(const char *s1, const char *s2, size_t n);
+void	prepare_stack_normal(t_node *target, t_node **stack_a, \
+		t_node **stack_b);
+void	prepare_stack_reverse(t_node *target, t_node **stack_a, \
+		t_node **stack_b);
+int		checker_and_reverse(int nbr);
+t_node	*search_node(t_node *head, t_node *target);
+void	calculate_cost_rr_rrr(t_node **stack_b);
+int		rrr_calculate(int tmp_cost_a, int tmp_cost_b);
+int		rr_calculate(int tmp_cost_a, int tmp_cost_b);
 
 void	positive_mov(t_node *target, t_node **stack_a, t_node **stack_b);
 void	negative_mov(t_node *target, t_node **stack_a, t_node **stack_b);
@@ -82,6 +82,4 @@ void	rr(t_node **stack_a, t_node **stack_b);
 void	rra(t_node **stack);
 void	rrb(t_node **stack);
 void	rrr(t_node **stack_a, t_node **stack_b);
-// borrar apartir de aqui son funciones para probar.
-void	print_list(t_node *stack);
 #endif

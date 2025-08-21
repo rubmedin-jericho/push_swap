@@ -12,37 +12,18 @@
 
 #include "push_swap.h"
 
-//int	recuento_del_stack(t_node *stack_a)
-//{
-//	t_node	*tmp;
-//	int		i;
-//	int		size_stack;
-//
-//	i = 0;
-//	size_stack = ft_size_stack(stack_a) - 1;
-//	tmp = stack_a;
-//	while(tmp->next)
-//	{
-//		if (i == tmp->target)
-//			i++;
-//		tmp = tmp->next;
-//	}
-//	if(i != size_stack)
-//		return (1);
-//	return (0);
-//}
-
-int recuento_del_stack(t_node *stack)
+int	recuento_del_stack(t_node *stack)
 {
-	t_node *tmp = stack;
+	t_node	*tmp;
 
+	tmp = stack;
 	while (tmp && tmp->next)
 	{
 		if (tmp->target > tmp->next->target)
-			return 1;
+			return (1);
 		tmp = tmp->next;
 	}
-	return 0;
+	return (0);
 }
 
 static int	verify_num(t_node *stack_a)
@@ -76,7 +57,7 @@ static int	push_swap(char **argv, int argc)
 		return (1);
 	if (verify_num(stack_a))
 		return (1);
-	if(!recuento_del_stack(stack_a))
+	if (!recuento_del_stack(stack_a))
 		return (0);
 	if (argc > 6)
 		sort_algorithm(&stack_a, &stack_b);
@@ -122,7 +103,7 @@ int	main(int argc, char **argv)
 	}
 	if (push_swap(argv, argc))
 	{
-		write(2,"Error\n", 6);
+		write(2, "Error\n", 6);
 		return (2);
 	}
 	return (0);
